@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.screens.MainScreen;
 import com.mygdx.game.screens.MenuScreen;
+import com.mygdx.game.screens.OptionScreen;
 
 public class KuzniaGame extends Game {
 	public SpriteBatch batch;
@@ -11,7 +12,7 @@ public class KuzniaGame extends Game {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		this.setScreen(new MenuScreen(this));
+		this.setScreen(new OptionScreen(this));
 
 	}
 
