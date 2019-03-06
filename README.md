@@ -1,2 +1,2 @@
-# KuznaKowala
+# KuzniaKowala
 Project UZ
