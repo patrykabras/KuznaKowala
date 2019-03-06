@@ -3,34 +3,29 @@
   <component name="GradleLocalSettings">
     <option name="projectSyncType">
       <map>
-        <entry key="$PROJECT_DIR$/../Kuznia" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../KuznaKowalaa" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../KuzniaKowala-Khatyrius" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../KuzniaKowala/KuzniaKowala" value="PREVIEW" />
         <entry key="$PROJECT_DIR$" value="PREVIEW" />
-        <entry key="$USER_HOME$/Downloads/SimpleProject" value="PREVIEW" />
+        <entry key="$USER_HOME$/Documents/LIBGDX/TEST" value="PREVIEW" />
       </map>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="10" />
     <option name="y" value="20" />
     <option name="width" value="1346" />
     <option name="height" value="688" />
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551901735656" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/core/assets" />
   </component>
   <component name="RunManager">
-    <configuration name="DesktopLauncher" type="Application" factoryName="Application" nameIsGenerated="true">
-      <option name="ALTERNATIVE_JRE_PATH" value="1.8" />
+    <configuration name="Desktop" type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="11" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="com.mygdx.game.desktop.DesktopLauncher" />
-      <module name="KuzniaV2.desktop" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/core/assets" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="com.mygdx.game.desktop.DesktopLauncher" />
+      <module name="KuzniaKowala.desktop" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/core/assets" />
       <method v="2">
         <option name="Make" enabled="true" />
