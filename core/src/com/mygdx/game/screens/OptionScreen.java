@@ -44,9 +44,19 @@ public class OptionScreen implements Screen {
 
         if(Gdx.input.getX() >250 && Gdx.input.getX() < 440 && Gdx.input.getY()>260 && Gdx.input.getY()<310) {
             game.batch.draw(backActive, 250, 110);
+            if(Gdx.input.isTouched())
+            {
+                this.dispose();
+                game.setScreen(new MenuScreen(game));
+            }
         }else game.batch.draw(backInactive, 250, 110);
 
-        game.batch.draw(checkboxUnchecked,370,205);
+        if(Gdx.input.getX() >370 && Gdx.input.getX() < 410 && Gdx.input.getY()>165 && Gdx.input.getY()<205) {
+            if(Gdx.input.isTouched()){
+                game.batch.draw(checkboxChecked, 370, 205);
+            }
+        }else game.batch.draw(checkboxUnchecked, 370, 205);
+
 
         game.batch.end();
     }
