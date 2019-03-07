@@ -2,16 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
 <<<<<<< HEAD
+<<<<<<< HEAD
     <list default="true" id="5d5175e0-d064-4ede-81be-a1b0a4f002d5" name="Default Changelist" comment="">
 <<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/screens/MenuScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/screens/MenuScreen.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/screens/OptionScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/screens/OptionScreen.java" afterDir="false" />
 =======
+=======
+
+      <list default="true" id="5d5175e0-d064-4ede-81be-a1b0a4f002d5" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/screens/MenuScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/screens/MenuScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/screens/OptionScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/screens/OptionScreen.java" afterDir="false" />
+
+>>>>>>> NervousSmth
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-=======
-    <list default="true" id="cefe6edd-5217-4447-a761-1c6fc12d1524" name="Default Changelist" comment="">
+
+      <list default="true" id="cefe6edd-5217-4447-a761-1c6fc12d1524" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_badlogicgames_gdx_gdx_1_9_9.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_badlogicgames_gdx_gdx_backend_lwjgl_1_9_9.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_badlogicgames_gdx_gdx_box2d_1_9_9.xml" afterDir="false" />
@@ -42,8 +50,12 @@
       <change beforePath="$PROJECT_DIR$/core/out/production/classes/com/mygdx/game/screens/MainScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/com/mygdx/game/screens/MainScreen.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/out/production/classes/com/mygdx/game/screens/MenuScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/com/mygdx/game/screens/MenuScreen.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/desktop/out/production/classes/com/mygdx/game/desktop/DesktopLauncher.class" beforeDir="false" afterPath="$PROJECT_DIR$/desktop/out/production/classes/com/mygdx/game/desktop/DesktopLauncher.class" afterDir="false" />
+<<<<<<< HEAD
 >>>>>>> master
 >>>>>>> master
+=======
+
+>>>>>>> NervousSmth
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -64,7 +76,6 @@
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
-<<<<<<< HEAD
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
@@ -72,23 +83,40 @@
         <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/KuzniaGame.java">
           <provider selected="true" editor-type-id="text-editor">
 <<<<<<< HEAD
+<<<<<<< HEAD
             <state>
               <caret column="18" selection-start-column="18" selection-end-column="18" />
 =======
             <state relative-caret-position="1037">
               <caret line="65" column="8" selection-start-line="65" selection-start-column="8" selection-end-line="65" selection-end-column="25" />
 >>>>>>> master
+=======
+
+            <state>
+              <caret column="18" selection-start-column="18" selection-end-column="18" />
+            <state relative-caret-position="1037">
+              <caret line="65" column="8" selection-start-line="65" selection-start-column="8" selection-end-line="65" selection-end-column="25" />
+
+>>>>>>> NervousSmth
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> NervousSmth
         <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/screens/MainScreen.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="459">
               <caret line="35" column="5" lean-forward="true" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="5" />
+<<<<<<< HEAD
 =======
+=======
+
+>>>>>>> NervousSmth
         <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/screens/OptionScreen.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="646">
@@ -96,12 +124,20 @@
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+<<<<<<< HEAD
 >>>>>>> master
+=======
+
+>>>>>>> NervousSmth
             </state>
           </provider>
         </entry>
       </file>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> NervousSmth
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/screens/MenuScreen.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -113,10 +149,17 @@
       </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/screens/OptionScreen.java">
+<<<<<<< HEAD
 =======
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/KuzniaGame.java">
 >>>>>>> master
+=======
+
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/KuzniaGame.java">
+
+>>>>>>> NervousSmth
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="221">
               <caret line="17" column="127" selection-start-line="17" selection-start-column="127" selection-end-line="17" selection-end-column="127" />
@@ -144,13 +187,13 @@
         <option value="$PROJECT_DIR$/core/src/com/mygdx/game/screens/OptionScreen.java" />
       </list>
     </option>
-=======
->>>>>>> master
+
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
+<<<<<<< HEAD
 <<<<<<< HEAD
     <option name="x" value="391" />
     <option name="y" value="-9" />
@@ -158,6 +201,15 @@
     <option name="x" value="10" />
     <option name="y" value="20" />
 >>>>>>> master
+=======
+
+    <option name="x" value="391" />
+    <option name="y" value="-9" />
+
+    <option name="x" value="10" />
+    <option name="y" value="20" />
+
+>>>>>>> NervousSmth
     <option name="width" value="1346" />
     <option name="height" value="688" />
   </component>
@@ -167,6 +219,7 @@
     </navigator>
     <panes>
 <<<<<<< HEAD
+<<<<<<< HEAD
       <pane id="PackagesPane" />
 =======
 <<<<<<< HEAD
@@ -175,10 +228,18 @@
       <pane id="PackagesPane" />
 >>>>>>> master
 >>>>>>> master
+=======
+
+      <pane id="PackagesPane" />
+
+      <pane id="Scope" />
+
+>>>>>>> NervousSmth
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
+<<<<<<< HEAD
 <<<<<<< HEAD
               <item name="KuzniaKowala" type="b2602c69:ProjectViewProjectNode" />
               <item name="KuzniaKowala" type="9c53a853:ProjectViewModuleGroupNode" />
@@ -187,6 +248,15 @@
               <item name="KuzniaV2" type="b2602c69:ProjectViewProjectNode" />
               <item name="KuzniaV2" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
 >>>>>>> master
+=======
+
+              <item name="KuzniaKowala" type="b2602c69:ProjectViewProjectNode" />
+              <item name="KuzniaKowala" type="9c53a853:ProjectViewModuleGroupNode" />
+
+              <item name="KuzniaV2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="KuzniaV2" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+
+>>>>>>> NervousSmth
             </path>
             <path>
               <item name="KuzniaKowala" type="b2602c69:ProjectViewProjectNode" />
@@ -213,7 +283,7 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="game" type="462c0819:PsiDirectoryNode" />
               <item name="screens" type="462c0819:PsiDirectoryNode" />
-=======
+
               <item name="KuzniaKowala" type="b2602c69:ProjectViewProjectNode" />
               <item name="KuzniaKowala" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
             </path>
@@ -221,34 +291,52 @@
               <item name="KuzniaKowala" type="b2602c69:ProjectViewProjectNode" />
               <item name="KuzniaKowala" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="desktop" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
->>>>>>> master
+
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
       <pane id="PackagesPane" />
 >>>>>>> master
+=======
+
+      <pane id="PackagesPane" />
+
+>>>>>>> NervousSmth
       <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
 <<<<<<< HEAD
+<<<<<<< HEAD
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551980101443" />
 =======
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551903372928" />
 =======
+
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551980101443" />
+
+>>>>>>> NervousSmth
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551903372928" />
+
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$/core/assets" />
+<<<<<<< HEAD
 >>>>>>> master
 >>>>>>> master
+=======
+
+>>>>>>> NervousSmth
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -269,6 +357,10 @@
       <option name="MAIN_CLASS_NAME" value="com.mygdx.game.desktop.DesktopLauncher" />
       <module name="KuzniaKowala.desktop" />
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> NervousSmth
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/core/assets" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -276,8 +368,12 @@
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="com.mygdx.game.desktop.DesktopLauncher" />
+<<<<<<< HEAD
 =======
 >>>>>>> master
+=======
+
+>>>>>>> NervousSmth
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/core/assets" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -289,24 +385,36 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-<<<<<<< HEAD
+
       <changelist id="5d5175e0-d064-4ede-81be-a1b0a4f002d5" name="Default Changelist" comment="" />
       <created>1551901600884</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1551901600884</updated>
 <<<<<<< HEAD
+<<<<<<< HEAD
       <workItem from="1551947632289" duration="686000" />
       <workItem from="1551968451641" duration="7494000" />
 =======
 =======
+=======
+
+      <workItem from="1551947632289" duration="686000" />
+      <workItem from="1551968451641" duration="7494000" />
+
+>>>>>>> NervousSmth
       <changelist id="cefe6edd-5217-4447-a761-1c6fc12d1524" name="Default Changelist" comment="" />
       <created>1551902178415</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1551902178415</updated>
+<<<<<<< HEAD
 >>>>>>> master
 >>>>>>> master
+=======
+
+
+>>>>>>> NervousSmth
     </task>
     <servers />
   </component>
@@ -315,6 +423,10 @@
   </component>
   <component name="ToolWindowManager">
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> NervousSmth
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
@@ -328,8 +440,12 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32936078" />
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+
+>>>>>>> NervousSmth
     <frame x="10" y="20" width="1346" height="688" extended-state="0" />
     <editor active="true" />
     <layout>
@@ -342,7 +458,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32972974" />
-=======
+
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
       <window_info id="Image Layers" />
@@ -360,20 +476,29 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32936078" />
+<<<<<<< HEAD
 >>>>>>> master
 >>>>>>> master
+=======
+
+>>>>>>> NervousSmth
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> master
+=======
+
+>>>>>>> NervousSmth
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Build" order="10" weight="0.32972974" />
+<<<<<<< HEAD
 <<<<<<< HEAD
       <window_info anchor="bottom" id="Messages" order="11" weight="0.32936078" />
       <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
@@ -381,6 +506,15 @@
 =======
       <window_info anchor="bottom" id="Messages" order="11" />
 >>>>>>> master
+=======
+
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.32936078" />
+      <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="13" />
+
+      <window_info anchor="bottom" id="Messages" order="11" />
+
+>>>>>>> NervousSmth
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -390,10 +524,17 @@
       <window_info anchor="right" id="Capture Analysis" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
 <<<<<<< HEAD
+<<<<<<< HEAD
       <window_info anchor="right" id="Palette" order="8" />
       <window_info anchor="right" id="Database" order="9" />
 =======
 >>>>>>> master
+=======
+
+      <window_info anchor="right" id="Palette" order="8" />
+      <window_info anchor="right" id="Database" order="9" />
+
+>>>>>>> NervousSmth
     </layout>
     <layout-to-restore>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17537314" />
@@ -436,6 +577,10 @@
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.9.9/1409aca6a4293a7ca8dbd60281c3211a195dd39a/gdx-1.9.9-sources.jar!/com/badlogic/gdx/Screen.java">
       <provider selected="true" editor-type-id="text-editor">
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> NervousSmth
         <state relative-caret-position="492">
           <caret line="49" lean-forward="true" selection-start-line="49" selection-end-line="49" />
         </state>
@@ -466,7 +611,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="17" column="127" selection-start-line="17" selection-start-column="127" selection-end-line="17" selection-end-column="127" />
+<<<<<<< HEAD
 =======
+=======
+
+>>>>>>> NervousSmth
         <state relative-caret-position="1037">
           <caret line="65" column="8" selection-start-line="65" selection-start-column="8" selection-end-line="65" selection-end-column="25" />
         </state>
@@ -479,7 +628,11 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+<<<<<<< HEAD
 >>>>>>> master
+=======
+
+>>>>>>> NervousSmth
         </state>
       </provider>
     </entry>
@@ -491,7 +644,7 @@
       </provider>
     </entry>
   </component>
-=======
+
       <window_info anchor="right" id="Palette" />
       <window_info anchor="right" id="Gradle" />
       <window_info anchor="right" id="Theme Preview" />
@@ -503,7 +656,7 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
   </component>
->>>>>>> master
+
   <component name="masterDetails">
     <states>
       <state key="ProjectJDKs.UI">
