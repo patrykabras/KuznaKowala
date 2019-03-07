@@ -51,6 +51,11 @@ public class MenuScreen implements Screen {
 
         if(Gdx.input.getX() >250 && Gdx.input.getX() < 440 && Gdx.input.getY()>110 && Gdx.input.getY()<160) {
             game.batch.draw(newGameActive, 250, 260);
+            if(Gdx.input.justTouched())
+            {
+                this.dispose();
+                game.setScreen(new MainScreen(game));
+            }
 
         }else game.batch.draw(newGameInactive, 250, 260);
 

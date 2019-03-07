@@ -15,7 +15,7 @@ public class OptionScreen implements Screen {
     Texture backActive;
     Texture checkboxUnchecked;
     Texture checkboxChecked;
-    static int IsClicked = 1;
+    static int IsClicked = 1; //Sprawdza czy boks z muzyką jest "zaptaszkowany" 1 - tak, 0 - nie, domyślnie muzyka włączona(?)
     public OptionScreen(KuzniaGame game){
         this.game=game;
 
@@ -50,7 +50,7 @@ public class OptionScreen implements Screen {
                 game.setScreen(new MenuScreen(game));
             }
         }else game.batch.draw(backInactive, 250, 110);
-
+        //if sprawdzajacy czy boks jest zaznaczony
         if(IsClicked==0) {
             if (Gdx.input.getX() > 370 && Gdx.input.getX() < 410 && Gdx.input.getY() > 165 && Gdx.input.getY() < 205) {
                 if (Gdx.input.justTouched()) {
