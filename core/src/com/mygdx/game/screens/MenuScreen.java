@@ -47,8 +47,16 @@ public class MenuScreen implements Screen {
 
         game.batch.draw(menuHolder, 240, 100);
 
+
+
         if(Gdx.input.getX() >250 && Gdx.input.getX() < 440 && Gdx.input.getY()>110 && Gdx.input.getY()<160) {
             game.batch.draw(newGameActive, 250, 260);
+            if(Gdx.input.justTouched())
+            {
+                this.dispose();
+                game.setScreen(new MainScreen(game));
+            }
+
         }else game.batch.draw(newGameInactive, 250, 260);
 
         if(Gdx.input.getX() >250 && Gdx.input.getX() < 440 && Gdx.input.getY()>160 && Gdx.input.getY()<210) {
@@ -57,10 +65,20 @@ public class MenuScreen implements Screen {
 
         if(Gdx.input.getX() >250 && Gdx.input.getX() < 440 && Gdx.input.getY()>210 && Gdx.input.getY()<260) {
             game.batch.draw(optionsActive, 250, 160);
+            if(Gdx.input.justTouched())
+            {
+                this.dispose();
+                game.setScreen(new OptionScreen(game));
+            }
+
         }else game.batch.draw(optionsInactive, 250, 160);
 
         if(Gdx.input.getX() >250 && Gdx.input.getX() < 440 && Gdx.input.getY()>260 && Gdx.input.getY()<310) {
             game.batch.draw(exitActive, 250, 110);
+            if(Gdx.input.justTouched())
+            {
+               Gdx.app.exit();
+            }
         }else game.batch.draw(exitInactive, 250, 110);
 
         game.batch.end();
@@ -88,6 +106,15 @@ public class MenuScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        newGameInactive.dispose();
+        newGameActive.dispose();
+        loadGameActive.dispose();
+        loadGameInactive.dispose();
+        optionsActive.dispose();
+        optionsInactive.dispose();
+        exitActive.dispose();
+        exitInactive.dispose();
+        menuHolder.dispose();
+        menuHolder.dispose();
     }
 }
