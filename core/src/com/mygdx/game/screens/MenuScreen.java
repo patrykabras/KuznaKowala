@@ -46,10 +46,22 @@ public class MenuScreen implements Screen {
         game.batch.begin();
 
         game.batch.draw(menuHolder, 240, 100);
-        game.batch.draw(newGameInactive,250,260);
-        game.batch.draw(loadGameInactive,250,210);
-        game.batch.draw(optionsInactive,250,160);
-        game.batch.draw(exitInactive,250,110);
+
+        if(Gdx.input.getX() >250 && Gdx.input.getX() < 440 && Gdx.input.getY()>110 && Gdx.input.getY()<160) {
+            game.batch.draw(newGameActive, 250, 260);
+        }else game.batch.draw(newGameInactive, 250, 260);
+
+        if(Gdx.input.getX() >250 && Gdx.input.getX() < 440 && Gdx.input.getY()>160 && Gdx.input.getY()<210) {
+            game.batch.draw(loadGameActive, 250, 210);
+        }else game.batch.draw(loadGameInactive, 250, 210);
+
+        if(Gdx.input.getX() >250 && Gdx.input.getX() < 440 && Gdx.input.getY()>210 && Gdx.input.getY()<260) {
+            game.batch.draw(optionsActive, 250, 160);
+        }else game.batch.draw(optionsInactive, 250, 160);
+
+        if(Gdx.input.getX() >250 && Gdx.input.getX() < 440 && Gdx.input.getY()>260 && Gdx.input.getY()<310) {
+            game.batch.draw(exitActive, 250, 110);
+        }else game.batch.draw(exitInactive, 250, 110);
 
         game.batch.end();
     }
