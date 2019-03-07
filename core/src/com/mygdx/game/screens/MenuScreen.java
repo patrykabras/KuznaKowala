@@ -60,18 +60,17 @@ public class MenuScreen implements Screen {
 
         if(Gdx.input.getX() >250 && Gdx.input.getX() < 440 && Gdx.input.getY()>210 && Gdx.input.getY()<260) {
             game.batch.draw(optionsActive, 250, 160);
-            if(Gdx.input.isTouched())
+            if(Gdx.input.justTouched())
             {
                 this.dispose();
                 game.setScreen(new OptionScreen(game));
-
             }
 
         }else game.batch.draw(optionsInactive, 250, 160);
 
         if(Gdx.input.getX() >250 && Gdx.input.getX() < 440 && Gdx.input.getY()>260 && Gdx.input.getY()<310) {
             game.batch.draw(exitActive, 250, 110);
-            if(Gdx.input.isTouched())
+            if(Gdx.input.justTouched())
             {
                Gdx.app.exit();
             }

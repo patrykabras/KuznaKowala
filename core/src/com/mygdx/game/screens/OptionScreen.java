@@ -15,7 +15,7 @@ public class OptionScreen implements Screen {
     Texture backActive;
     Texture checkboxUnchecked;
     Texture checkboxChecked;
-
+    static int IsClicked = 1;
     public OptionScreen(KuzniaGame game){
         this.game=game;
 
@@ -44,19 +44,28 @@ public class OptionScreen implements Screen {
 
         if(Gdx.input.getX() >250 && Gdx.input.getX() < 440 && Gdx.input.getY()>260 && Gdx.input.getY()<310) {
             game.batch.draw(backActive, 250, 110);
-            if(Gdx.input.isTouched())
+            if(Gdx.input.justTouched())
             {
                 this.dispose();
                 game.setScreen(new MenuScreen(game));
             }
         }else game.batch.draw(backInactive, 250, 110);
 
-        if(Gdx.input.getX() >370 && Gdx.input.getX() < 410 && Gdx.input.getY()>165 && Gdx.input.getY()<205) {
-            if(Gdx.input.isTouched()){
-                game.batch.draw(checkboxChecked, 370, 205);
-            }
-        }else game.batch.draw(checkboxUnchecked, 370, 205);
-
+        if(IsClicked==0) {
+            if (Gdx.input.getX() > 370 && Gdx.input.getX() < 410 && Gdx.input.getY() > 165 && Gdx.input.getY() < 205) {
+                if (Gdx.input.justTouched()) {
+                    game.batch.draw(checkboxChecked, 370, 205);
+                    IsClicked=1;
+                }
+            } else game.batch.draw(checkboxUnchecked, 370, 205);
+        } else {
+            if (Gdx.input.getX() > 370 && Gdx.input.getX() < 410 && Gdx.input.getY() > 165 && Gdx.input.getY() < 205) {
+                if (Gdx.input.justTouched()) {
+                    game.batch.draw(checkboxUnchecked, 370, 205);
+                    IsClicked=0;
+                }
+            } else game.batch.draw(checkboxChecked, 370, 205);
+        }
 
         game.batch.end();
     }
