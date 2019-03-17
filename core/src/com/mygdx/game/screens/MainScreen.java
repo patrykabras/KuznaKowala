@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.utils.Timer;
 import com.mygdx.game.KuzniaGame;
 
 public class MainScreen implements Screen {
@@ -27,9 +28,14 @@ public class MainScreen implements Screen {
         game.batch.begin();
         game.batch.draw(img, 225, 100);
         game.batch.end();
-
+        //Delay from MainScreen to MenuScreen
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                game.setScreen(new MenuScreen(game));
+            }
+        }, 1);
     }
-
     @Override
     public void resize(int width, int height) {
 

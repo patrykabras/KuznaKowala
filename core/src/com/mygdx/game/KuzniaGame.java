@@ -12,7 +12,7 @@ public class KuzniaGame extends Game {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		this.setScreen(new MenuScreen(this));
+		this.setScreen(new MainScreen(this));
 
 	}
 
