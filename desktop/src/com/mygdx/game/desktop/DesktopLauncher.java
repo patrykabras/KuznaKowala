@@ -12,7 +12,7 @@ public class DesktopLauncher {
 		config.height=420;
 		config.backgroundFPS=60;
 		config.foregroundFPS=60;
-		config.resizable=false;
+		config.resizable=true;
 		new LwjglApplication(new KuzniaGame(), config);
 	}
 }
