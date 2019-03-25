@@ -4,8 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/KuzniaKowala.iml" filepath="$PROJECT_DIR$/KuzniaKowala.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/KuzniaKowala.core.iml" filepath="$PROJECT_DIR$/.idea/modules/core/KuzniaKowala.core.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/KuzniaKowala.core.iml" filepath="$PROJECT_DIR$/.idea/modules/core/KuzniaKowala.core.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/desktop/KuzniaKowala.desktop.iml" filepath="$PROJECT_DIR$/.idea/modules/desktop/KuzniaKowala.desktop.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/desktop/KuzniaKowala.desktop.iml" filepath="$PROJECT_DIR$/.idea/modules/desktop/KuzniaKowala.desktop.iml" />
     </modules>
   </component>
