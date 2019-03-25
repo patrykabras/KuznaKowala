@@ -30,6 +30,8 @@ public class GameActive implements Screen {
         hud = new Hud(game.batch);
         resources = new Texture("resources.png");
         gamePort = new FitViewport(720, 420, mCamera);
+
+
     }
     @Override
     public void show() {
@@ -65,6 +67,13 @@ public class GameActive implements Screen {
         mCamera.position.y = MathUtils.clamp(mCamera.position.y, effectiveViewportHeight / 2f, 1600 - effectiveViewportHeight / 2f);
 //        mCamera.position.x = MathUtils.clamp(mCamera.position.x, 0 ,50);
 //        mCamera.position.y = MathUtils.clamp(mCamera.position.y, 0, 50);
+
+
+        //escape button to menu
+        if(Gdx.input.isKeyPressed(131))
+        {
+            game.setScreen(new PauseScreen(game));
+        }
     }
 
     public void update(){
