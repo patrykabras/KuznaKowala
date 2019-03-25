@@ -15,7 +15,7 @@ public class OptionScreen implements Screen {
     Texture backActive;
     Texture checkboxUnchecked;
     Texture checkboxChecked;
-    static int IsClicked = 1; //Sprawdza czy boks z muzyką jest "zaptaszkowany" 1 - tak, 0 - nie, domyślnie muzyka włączona(?)
+    public static int IsClicked = 1; //Sprawdza czy boks z muzyką jest "zaptaszkowany" 1 - tak, 0 - nie, domyślnie muzyka włączona(?)
     public OptionScreen(KuzniaGame game){
         this.game=game;
 
@@ -53,16 +53,20 @@ public class OptionScreen implements Screen {
         //if sprawdzajacy czy boks jest zaznaczony
         if(IsClicked==0) {
             if (Gdx.input.getX() > 370 && Gdx.input.getX() < 410 && Gdx.input.getY() > 165 && Gdx.input.getY() < 205) {
+                game.batch.draw(checkboxUnchecked, 370, 205);
                 if (Gdx.input.justTouched()) {
-                    game.batch.draw(checkboxChecked, 370, 205);
                     IsClicked=1;
+                    game.batch.draw(checkboxChecked, 370, 205);
+                    KuzniaGame.music.play();
                 }
             } else game.batch.draw(checkboxUnchecked, 370, 205);
         } else {
-            if (Gdx.input.getX() > 370 && Gdx.input.getX() < 410 && Gdx.input.getY() > 165 && Gdx.input.getY() < 205) {
+            game.batch.draw(checkboxChecked, 370, 205);
+            if (Gdx.input.getX() > 370 && Gdx.input.getX() < 410 && Gdx.input.getY() > 165 && Gdx.input.getY() < 205)
                 if (Gdx.input.justTouched()) {
-                    game.batch.draw(checkboxUnchecked, 370, 205);
                     IsClicked=0;
+                    game.batch.draw(checkboxUnchecked, 370, 205);{
+                        KuzniaGame.music.stop();
                 }
             } else game.batch.draw(checkboxChecked, 370, 205);
         }
