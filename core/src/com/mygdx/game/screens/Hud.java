@@ -2,6 +2,7 @@ package com.mygdx.game.screens;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -9,25 +10,29 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.game.KuzniaGame;
 
 
 public class Hud {
     public Stage stage;
     private Viewport viewport;
-
+    private final KuzniaGame game;
     private Integer wood;
     private Integer stone;
     private Integer ore;
-
+    private Texture resources;
     Label woodLabel;
     Label stoneLabel;
     Label oreLabel;
 
 
-    public Hud(SpriteBatch sb){
+    public Hud(SpriteBatch sb,KuzniaGame game){
+        this.game=game;
         wood = 0;
         stone = 0;
         ore = 0;
+
+        resources = new Texture("resources.png");
 
         viewport = new FitViewport(720, 420, new OrthographicCamera());
         stage = new Stage(viewport, sb);
@@ -49,5 +54,12 @@ public class Hud {
 
         stage.addActor(table);
 
+    }
+    public void showInterface(){
+        game.batch.begin();
+        game.batch.draw(resources, 0 ,361);
+        game.batch.end();
+        game.batch.setProjectionMatrix(this.stage.getCamera().combined);
+        this.stage.draw();
     }
 }
