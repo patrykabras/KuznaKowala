@@ -42,8 +42,8 @@ public class GameActive implements Screen {
             float deltaX = (float)Gdx.input.getDeltaX();
             float deltaY = (float)Gdx.input.getDeltaY();
             mCamera.getmCamera().translate(-deltaX, deltaY, 0);
-            mCamera.getmCamera().unproject(mousePosition);
-            System.out.println("Pozycja Myszki: "+mCamera.getmCamera().unproject(mousePosition));
+            Vector3 mouseClickPositon = mCamera.getmCamera().unproject(mousePosition);
+            System.out.println("Pozycja Myszki: "+mouseClickPositon);
         }
     }
 
