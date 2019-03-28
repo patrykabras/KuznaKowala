@@ -3,6 +3,7 @@ package com.mygdx.game.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.*;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.KuzniaGame;
@@ -19,9 +20,11 @@ public class GameActive implements Screen {
     public GameActive(KuzniaGame game){
         this.game=game;
         mCamera = new Camera();
+        MapGenerator test = new MapGenerator();
         mapRenderer = new MapRenderer();
         hud = new Hud(game.batch,game);
         gamePort = new FitViewport(720, 420, mCamera.getmCamera());
+
     }
     @Override
     public void show() {
@@ -32,6 +35,15 @@ public class GameActive implements Screen {
         if(Gdx.input.isKeyPressed(131))
         {
             game.setScreen(new PauseScreen(game));
+        }
+        if(Gdx.input.isTouched()){
+            Vector3 mousePosition = new Vector3(0,0,0);
+            mousePosition.set(Gdx.input.getX(), Gdx.input.getY(), 0);
+            float deltaX = (float)Gdx.input.getDeltaX();
+            float deltaY = (float)Gdx.input.getDeltaY();
+            mCamera.getmCamera().translate(-deltaX, deltaY, 0);
+            mCamera.getmCamera().unproject(mousePosition);
+            System.out.println("Pozycja Myszki: "+mCamera.getmCamera().unproject(mousePosition));
         }
     }
 

@@ -9,7 +9,8 @@ public class MapRenderer {
     private OrthogonalTiledMapRenderer render;
 
     public MapRenderer() {
-        map = new TmxMapLoader().load("mapTuT.tmx");
+//        map = new TmxMapLoader().load("mapTuT.tmx");
+        map = new TmxMapLoader().load("generTest.tmx");
         render = new OrthogonalTiledMapRenderer(map);
     }
 
