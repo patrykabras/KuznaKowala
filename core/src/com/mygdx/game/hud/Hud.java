@@ -1,4 +1,4 @@
-package com.mygdx.game.screens;
+package com.mygdx.game.hud;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -10,7 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.mygdx.game.KuzniaGame;
+import com.mygdx.game.app.KuzniaGame;
 
 
 public class Hud {

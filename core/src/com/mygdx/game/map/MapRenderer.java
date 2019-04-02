@@ -1,8 +1,9 @@
-package com.mygdx.game.screens;
+package com.mygdx.game.map;
 
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.mygdx.game.camera.Camera;
 
 public class MapRenderer {
     private TiledMap map;
