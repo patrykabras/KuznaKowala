@@ -5,7 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Timer;
-import com.mygdx.game.KuzniaGame;
+import com.mygdx.game.app.KuzniaGame;
 
 public class MainScreen implements Screen {
     Texture img;

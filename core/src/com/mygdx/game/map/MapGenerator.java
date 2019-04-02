@@ -1,4 +1,4 @@
-package com.mygdx.game.screens;
+package com.mygdx.game.map;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;

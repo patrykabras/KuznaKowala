@@ -1,4 +1,4 @@
-package com.mygdx.game.screens;
+package com.mygdx.game.app;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -6,7 +6,11 @@ import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.mygdx.game.KuzniaGame;
+import com.mygdx.game.camera.Camera;
+import com.mygdx.game.hud.Hud;
+import com.mygdx.game.map.MapGenerator;
+import com.mygdx.game.map.MapRenderer;
+import com.mygdx.game.screens.PauseScreen;
 
 public class GameActive implements Screen {
 
