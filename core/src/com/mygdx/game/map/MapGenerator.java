@@ -34,7 +34,7 @@ public class MapGenerator {
     };
     private ArrayList<int[][]> propsList;
     public MapGenerator() {
-        propsList = new ArrayList<>();
+        propsList = new ArrayList();
         propsList.add(DIRT);
         propsList.add(ROCK);
         propsList.add(SAND);
