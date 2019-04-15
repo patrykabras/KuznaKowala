@@ -10,7 +10,7 @@ public class GridRenderer {
     public GridRenderer() {
         render = new ShapeRenderer();
         render.setAutoShapeType(true);
-        grid = new MapGrid(51, 51);
+        grid = new MapGrid(50,50);
     }
 
     public void start(Camera camera) {

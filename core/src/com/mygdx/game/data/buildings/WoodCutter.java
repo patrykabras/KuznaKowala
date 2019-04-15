@@ -1,9 +1,7 @@
 package com.mygdx.game.data.buildings;
 
-import java.io.Serializable;
-
-public class TownHall extends Building {
-    private static final long serialVersionUID = 1L;
+public class WoodCutter extends Building {
+    private static final long serialVersionUID = 4L;
 
     @Override
     public void build() {
