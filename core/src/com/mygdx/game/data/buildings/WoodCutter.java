@@ -17,4 +17,9 @@ public class WoodCutter extends Building {
     public void upgrade() {
 
     }
+
+    @Override
+    public void working() {
+
+    }
 }

@@ -17,4 +17,9 @@ public class MetalMine extends Building {
     public void upgrade() {
 
     }
+
+    @Override
+    public void working() {
+
+    }
 }

@@ -7,4 +7,6 @@ public abstract class Building implements Buildable,Destrucatble,Upgradable {
     public abstract void destroy();
 
     public abstract void upgrade();
+
+    public abstract void working();
 }
