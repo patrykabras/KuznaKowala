@@ -30,7 +30,8 @@ public class MapRenderer {
     public void setRender(OrthogonalTiledMapRenderer render) {
         this.render = render;
     }
-    public void startUp(Camera camera){
+
+    public void startUp(Camera camera) {
         render.setView(camera.getmCamera());
         render.render();
     }
