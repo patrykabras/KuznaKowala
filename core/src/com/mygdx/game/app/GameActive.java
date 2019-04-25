@@ -38,7 +38,8 @@ public class GameActive implements Screen {
         //escape button to menu
         if(Gdx.input.isKeyPressed(131))
         {
-            game.setScreen(new PauseScreen(game));
+            game.setScreen(new PauseScreen(game, this));
+            this.pause();
         }
         if(Gdx.input.isTouched()){
             Vector3 mousePosition = new Vector3(0,0,0);

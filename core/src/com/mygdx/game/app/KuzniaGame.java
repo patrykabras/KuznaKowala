@@ -10,7 +10,9 @@ import com.mygdx.game.screens.OptionScreen;
 
 public class KuzniaGame extends Game {
 	public SpriteBatch batch;
+	public static boolean soundOn = true;
 	public static Music music;
+	public static Music pop;
 
 	@Override
 	public void create () {
@@ -19,9 +21,14 @@ public class KuzniaGame extends Game {
 		music = Gdx.audio.newMusic(Gdx.files.internal("mb1.ogg"));
 		music.setLooping(true);
 		music.setVolume(0.02f);
-		music.play();
-
-
+		if(soundOn == true) {
+			music.play();
+		}
+		else if (soundOn == false){
+			music.stop();
+		}
+		pop = Gdx.audio.newMusic(Gdx.files.internal("pop.ogg"));
+		pop.setVolume(0.1f);
 	}
 
 
@@ -33,5 +40,6 @@ public class KuzniaGame extends Game {
 	@Override
 	public void dispose () {
 	music.dispose();
+	pop.dispose();
 	}
 }
