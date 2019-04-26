@@ -44,6 +44,7 @@ public class GameActive implements Screen {
             game.setScreen(new PauseScreen(game));
         }
         if(Gdx.input.isTouched()){
+
             Vector3 mousePosition = new Vector3(0,0,0);
             mousePosition.set(Gdx.input.getX(), Gdx.input.getY(), 0);
             float deltaX = (float)Gdx.input.getDeltaX();
