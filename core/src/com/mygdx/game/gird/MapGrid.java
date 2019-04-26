@@ -2,14 +2,18 @@ package com.mygdx.game.gird;
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mygdx.game.camera.Camera;
+import com.mygdx.game.data.buildings.MetalMine;
+import com.mygdx.game.data.materials.Metal;
 import com.mygdx.game.map.TitleType;
 
 public class MapGrid {
     private boolean[][] mapGrid;
     private static final int CELL_SIZE = 32;
     private static final int MAP_SIZE = 50;
+    private Cell[][] cells = null;
 
     private int mapWidth,mapHeight;
+    private MetalMine metal;
 
     MapGrid(int width, int height){
         mapGrid = new boolean[width][height];
@@ -28,13 +32,12 @@ public class MapGrid {
     }
 
     void createGrid(TitleType titleType){
-        Cell[][] cells = new Cell[50][50];
+        this.cells = new Cell[50][50];
 
         for (int x = 0; x < MAP_SIZE; x++) {
             for (int y = 0; y < MAP_SIZE; y++) {
                 cells[x][y].setTitleInfo(titleType.getCell(x,y));
             }
         }
-
     }
 }

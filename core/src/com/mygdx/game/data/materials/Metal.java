@@ -1,19 +1,27 @@
 package com.mygdx.game.data.materials;
 
-public class Metal extends Material{
+public class Metal extends Material {
     private static int Value = 0;
+    private static Metal instance = new Metal();
 
-    public static int getValue() {
+    private Metal() {
+    }
+
+    public synchronized static Metal getInstance() {
+        return instance;
+    }
+
+    public int getValue() {
         return Value;
     }
 
     @Override
     public void increasedValue(int increasedAmount) {
-        this.Value += increasedAmount;
+        Value += increasedAmount;
     }
 
     @Override
-    public void decrasedValue(int decreasedAmount) {
-        this.Value -= decreasedAmount;
+    public void decreasedValue(int decreasedAmount) {
+        Value -= decreasedAmount;
     }
 }

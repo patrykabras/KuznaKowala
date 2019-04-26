@@ -2,8 +2,16 @@ package com.mygdx.game.data.materials;
 
 public class Wood extends Material {
     private static int Value = 0;
+    private static Wood instance = new Wood();
 
-    public static int getValue() {
+    private Wood() {
+    }
+
+    public synchronized static Wood getInstance() {
+        return instance;
+    }
+
+    public int getValue() {
         return Value;
     }
 
@@ -13,7 +21,7 @@ public class Wood extends Material {
     }
 
     @Override
-    public void decrasedValue(int decreasedAmount) {
+    public void decreasedValue(int decreasedAmount) {
         this.Value -= decreasedAmount;
     }
 }

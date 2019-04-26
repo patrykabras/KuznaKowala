@@ -19,4 +19,9 @@ public class TownHall extends Building {
     public void upgrade() {
 
     }
+
+    @Override
+    public void working() {
+
+    }
 }
