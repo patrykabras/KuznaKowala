@@ -1,5 +1,5 @@
 package com.mygdx.game.data.buildings;
 
-public interface Destrucatble {
+public interface Destroyable {
     public void destroy();
 }
