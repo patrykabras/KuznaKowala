@@ -40,4 +40,12 @@ public class MapGrid {
             }
         }
     }
+
+    public static int getCellSize() {
+        return CELL_SIZE;
+    }
+
+    public static int getMapSize() {
+        return MAP_SIZE;
+    }
 }

@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class Camera {
     private OrthographicCamera mCamera;
@@ -25,7 +26,7 @@ public class Camera {
     }
 
     public void userInput(){
-        int speedOfCam = 10;
+        int speedOfCam = 20;
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
             mCamera.zoom += 0.02;
         }

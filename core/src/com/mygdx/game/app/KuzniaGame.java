@@ -17,7 +17,7 @@ public class KuzniaGame extends Game {
         music = Gdx.audio.newMusic(Gdx.files.internal("mb1.ogg"));
         music.setLooping(true);
         music.setVolume(0.02f);
-        music.play();
+//        music.play();
     }
 
 
