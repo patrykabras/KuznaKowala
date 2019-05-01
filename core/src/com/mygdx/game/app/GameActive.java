@@ -46,7 +46,7 @@ public class GameActive implements Screen {
         //escape button to menu
         if(Gdx.input.isKeyPressed(131))
         {
-            game.setScreen(new PauseScreen(game, this));
+            game.setScreen(new PauseScreen(game));
             this.pause();
         }
         if(Gdx.input.isKeyPressed(62)){
