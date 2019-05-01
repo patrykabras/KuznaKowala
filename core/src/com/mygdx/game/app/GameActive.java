@@ -7,6 +7,8 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.camera.Camera;
+import com.mygdx.game.data.buildings.MetalMine;
+import com.mygdx.game.gird.GridRenderer;
 import com.mygdx.game.hud.Hud;
 import com.mygdx.game.map.MapGenerator;
 import com.mygdx.game.map.MapRenderer;
@@ -17,6 +19,7 @@ public class GameActive implements Screen {
     private final KuzniaGame game;
     private Camera mCamera;
     private MapRenderer mapRenderer;
+    private GridRenderer gridRenderer;
     private Hud hud;
     private Viewport gamePort;
 
@@ -26,9 +29,9 @@ public class GameActive implements Screen {
         mCamera = new Camera();
         MapGenerator test = new MapGenerator();
         mapRenderer = new MapRenderer();
+        gridRenderer = new GridRenderer();
         hud = new Hud(game.batch,game);
         gamePort = new FitViewport(720, 420, mCamera.getmCamera());
-
     }
     @Override
     public void show() {
@@ -42,6 +45,7 @@ public class GameActive implements Screen {
             this.pause();
         }
         if(Gdx.input.isTouched()){
+
             Vector3 mousePosition = new Vector3(0,0,0);
             mousePosition.set(Gdx.input.getX(), Gdx.input.getY(), 0);
             float deltaX = (float)Gdx.input.getDeltaX();
@@ -57,6 +61,7 @@ public class GameActive implements Screen {
         Gdx.gl.glClearColor(255, 255, 255, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         mapRenderer.startUp(mCamera);
+        gridRenderer.start(mCamera);
         hud.showInterface();
         userInput();
         mCamera.update();

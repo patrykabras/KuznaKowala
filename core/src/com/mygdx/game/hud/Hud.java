@@ -11,15 +11,18 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.app.KuzniaGame;
+import com.mygdx.game.data.materials.Metal;
+import com.mygdx.game.data.materials.Stone;
+import com.mygdx.game.data.materials.Wood;
 
 
 public class Hud {
     public Stage stage;
     private Viewport viewport;
     private final KuzniaGame game;
-    private Integer wood;
-    private Integer stone;
-    private Integer ore;
+    private Wood wood = Wood.getInstance();
+    private Stone stone = Stone.getInstance();
+    private Metal metal = Metal.getInstance();
     private Texture resources;
     Label woodLabel;
     Label stoneLabel;
@@ -28,10 +31,6 @@ public class Hud {
 
     public Hud(SpriteBatch sb,KuzniaGame game){
         this.game=game;
-        wood = 0;
-        stone = 0;
-        ore = 0;
-
         resources = new Texture("resources.png");
 
         viewport = new FitViewport(720, 420, new OrthographicCamera());
@@ -41,9 +40,9 @@ public class Hud {
         table.top();
         table.setFillParent(true);
 
-        woodLabel = new Label(String.format(String.format("%03d", wood)), new Label.LabelStyle(new BitmapFont(), Color.BLACK));
-        stoneLabel = new Label(String.format(String.format("%03d", stone)), new Label.LabelStyle(new BitmapFont(), Color.BLACK));
-        oreLabel = new Label(String.format(String.format("%03d", ore)), new Label.LabelStyle(new BitmapFont(), Color.BLACK));
+        woodLabel = new Label(String.format(String.format("%03d", wood.getValue())), new Label.LabelStyle(new BitmapFont(), Color.BLACK));
+        stoneLabel = new Label(String.format(String.format("%03d", stone.getValue())), new Label.LabelStyle(new BitmapFont(), Color.BLACK));
+        oreLabel = new Label(String.format(String.format("%03d", metal.getValue())), new Label.LabelStyle(new BitmapFont(), Color.BLACK));
 
         table.add(woodLabel).expandX().padLeft(-550);
         table.row();
