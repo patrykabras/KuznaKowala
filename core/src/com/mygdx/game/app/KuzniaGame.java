@@ -4,16 +4,11 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.mygdx.game.gird.MapGrid;
 import com.mygdx.game.screens.MainScreen;
-import com.mygdx.game.screens.MenuScreen;
-import com.mygdx.game.screens.OptionScreen;
 
 public class KuzniaGame extends Game {
-    public SpriteBatch batch;
     public static Music music;
-
+    public SpriteBatch batch;
 
     @Override
     public void create() {
@@ -23,7 +18,6 @@ public class KuzniaGame extends Game {
         music.setLooping(true);
         music.setVolume(0.02f);
         music.play();
-
     }
 
 

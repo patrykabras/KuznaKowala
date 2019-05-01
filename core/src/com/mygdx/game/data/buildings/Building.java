@@ -1,6 +1,8 @@
 package com.mygdx.game.data.buildings;
 
-public abstract class Building implements Buildable,Destrucatble,Upgradable {
+import com.mygdx.game.data.materials.Material;
+
+public abstract class Building implements Buildable, Destroyable,Upgradable {
     @Override
     public abstract void build();
 

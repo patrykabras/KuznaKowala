@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.camera.Camera;
+import com.mygdx.game.data.buildings.MetalMine;
 import com.mygdx.game.gird.GridRenderer;
 import com.mygdx.game.hud.Hud;
 import com.mygdx.game.map.MapGenerator;
@@ -31,7 +32,6 @@ public class GameActive implements Screen {
         gridRenderer = new GridRenderer();
         hud = new Hud(game.batch,game);
         gamePort = new FitViewport(720, 420, mCamera.getmCamera());
-
     }
     @Override
     public void show() {
@@ -44,6 +44,7 @@ public class GameActive implements Screen {
             game.setScreen(new PauseScreen(game));
         }
         if(Gdx.input.isTouched()){
+
             Vector3 mousePosition = new Vector3(0,0,0);
             mousePosition.set(Gdx.input.getX(), Gdx.input.getY(), 0);
             float deltaX = (float)Gdx.input.getDeltaX();
