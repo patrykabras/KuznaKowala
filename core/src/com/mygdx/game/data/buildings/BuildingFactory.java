@@ -5,8 +5,6 @@ import com.mygdx.game.exceptions.NoSuchBuildingException;
 public class BuildingFactory {
 
     public Building createNewBuilding(String type){
-        type = type.toLowerCase();
-
         if (type.equalsIgnoreCase("StoneMine")){
             return new StoneMine();
         }else if (type.equalsIgnoreCase("MetalMine")){

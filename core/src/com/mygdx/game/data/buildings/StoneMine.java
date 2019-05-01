@@ -5,7 +5,7 @@ import com.mygdx.game.data.materials.Stone;
 public class StoneMine extends Building {
     public static final long serialVersionUID = 2L;
     private static final int VALUE_INCREASE = 20;
-
+    private int lvl = 1;
     @Override
     public void build() {
 
@@ -18,7 +18,7 @@ public class StoneMine extends Building {
 
     @Override
     public void upgrade() {
-
+    lvl++;
     }
 
     @Override
@@ -26,7 +26,13 @@ public class StoneMine extends Building {
     Stone stone = Stone.getInstance();
 
     while(true){
-        stone.increasedValue(VALUE_INCREASE);
+        stone.increasedValue(VALUE_INCREASE*lvl);
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     }

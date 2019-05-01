@@ -13,7 +13,6 @@ public class MapGrid {
     private Cell[][] cells = null;
 
     private int mapWidth,mapHeight;
-    private MetalMine metal;
 
     MapGrid(int width, int height){
         mapGrid = new boolean[width][height];

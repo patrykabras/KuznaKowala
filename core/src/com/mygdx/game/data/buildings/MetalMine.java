@@ -6,7 +6,7 @@ import com.mygdx.game.data.materials.Metal;
 public class MetalMine extends Building {
     private static final long serialVersionUID = 3L;
     private static final int VALUE_INCREASE = 20;
-
+    private int lvl = 1;
     @Override
     public void build() {
 
@@ -19,7 +19,7 @@ public class MetalMine extends Building {
 
     @Override
     public void upgrade() {
-
+    lvl++;
     }
 
     @Override
@@ -27,7 +27,13 @@ public class MetalMine extends Building {
     Metal metal = Metal.getInstance();
 
     while(true) {
-        metal.increasedValue(VALUE_INCREASE);
+        metal.increasedValue(VALUE_INCREASE*lvl);
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     }
