@@ -1,7 +1,7 @@
 package com.mygdx.game.data.buildings;
 
 import com.mygdx.game.data.materials.Metal;
-import sun.awt.SunToolkit;
+//import sun.awt.SunToolkit;
 
 public class MetalMine extends Building {
     private static final long serialVersionUID = 3L;

@@ -19,4 +19,8 @@ public class GridRenderer {
         grid.render(render);
         render.end();
     }
+
+    public MapGrid getGrid() {
+        return grid;
+    }
 }

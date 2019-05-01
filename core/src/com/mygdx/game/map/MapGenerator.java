@@ -1,11 +1,18 @@
 package com.mygdx.game.map;
 
+import com.badlogic.gdx.math.MathUtils;
+
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class MapGenerator {
+    float[][] noise;
+    HashMap<Integer,Integer> materialsize = new HashMap<Integer, Integer>();
+
     private final int[][] SAND = {
             {1377, 1378, 1379},
             {1409, 1410, 1411},
@@ -40,6 +47,10 @@ public class MapGenerator {
         propsList.add(ROCK);
         propsList.add(SAND);
         propsList.add(GRASS);
+        materialsize.put(0,200);
+        materialsize.put(1,200);
+        materialsize.put(2,200);
+        materialsize.put(3,200);
         try {
             generateFile();
         } catch (FileNotFoundException e) {
@@ -112,12 +123,81 @@ public class MapGenerator {
         zapis.println("</layer>");
     }
 
+    private float[][] generateNoise(int width, int height) {
+        new SimplexNoise(MathUtils.random(10000));
+        float[][] noise = new float[width][height];
+        //Frequency = features. Higher = more features
+        float layerF = 0.003f;
+        //Weight = smoothness. Higher frequency = more smoothness
+        float weight = 1;
+
+        for(int i = 0; i < 4; i++) {
+            for(int x = 0; x < width; x++) {
+                for(int y = 0; y < height; y++) {
+                    noise[x][y] += (float) SimplexNoise.noise(x * layerF, y * layerF) * weight;
+                    noise[x][y] = MathUtils.clamp(noise[x][y], -0.25f, 0.25f);
+                }
+            }
+            layerF *= 3.5f;
+            weight *= 0.5f;
+        }
+
+        return noise;
+    }
+    private int getNumber(float val) {
+//        if(val >= -1.0f && val <= -0.1f) {
+//            return 0; //navy
+//        }
+//        else if(val > -0.1f && val <= 0.1f) {
+//            return 1; //blue
+//        }
+//        else if(val > 0.1f && val <= 0.6f) {
+//            return 2; //green
+//        }
+//        else if(val > 0.6f && val <= 1.0f) {
+//            return 3; //gray
+//        if (materialsize.get(1) != 0) {
+//            materialsize.put(1,materialsize.get(1)-1);
+//            return 1; //navy
+//        }else{
+//            int idMin = 0;
+//            int min = 600;
+//            for(Map.Entry<Integer, Integer> entry : materialsize.entrySet()) {
+//                Integer key = entry.getKey();
+//                Integer value = entry.getValue();
+//                if(min > value && value != 0){
+//                    min = value;
+//                    idMin = key;
+//                }
+//                // do what you have to do here
+//                // In your case, another loop.
+//            }
+//            materialsize.put(idMin,materialsize.get(idMin)-1);
+//            return idMin;
+//        }
+//        }
+        if(val >= -0.25f && val <= -0.125f) {
+            return 1;
+        }
+        else if(val > -0.125f && val <= 0.0f) {
+            return 2;
+        }
+        else if(val > 0.0f && val <= 0.125f) {
+            return 3;
+        }
+        else if(val > 0.125f && val <= 0.25f) {
+           return 0;
+        }
+        return 0;
+    }
     public void generateFile() throws FileNotFoundException {
         Random randGener = new Random();
         int[][] randomeTab = new int[48][50];
+        noise = generateNoise(48, 50);
         for (int x = 0; x < 48; x++) {
             for (int y = 0; y < 50; y++) {
-                randomeTab[x][y] = randGener.nextInt(4);
+//                randomeTab[x][y] = randGener.nextInt(4);
+                randomeTab[x][y] = getNumber(noise[x][y]);
             }
         }
 

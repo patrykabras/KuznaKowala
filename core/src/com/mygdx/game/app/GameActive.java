@@ -1,9 +1,11 @@
 package com.mygdx.game.app;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.camera.Camera;
@@ -20,6 +22,7 @@ public class GameActive implements Screen {
     private Camera mCamera;
     private MapRenderer mapRenderer;
     private GridRenderer gridRenderer;
+    private MapGenerator test;
     private Hud hud;
     private Viewport gamePort;
 
@@ -27,11 +30,13 @@ public class GameActive implements Screen {
     public GameActive(KuzniaGame game){
         this.game=game;
         mCamera = new Camera();
-        MapGenerator test = new MapGenerator();
+        test = new MapGenerator();
         mapRenderer = new MapRenderer();
         gridRenderer = new GridRenderer();
         hud = new Hud(game.batch,game);
-        gamePort = new FitViewport(720, 420, mCamera.getmCamera());
+//        gamePort = new FitViewport(720, 420, mCamera.getmCamera());
+//        gamePort = new ExtendViewport(720,420,mCamera.getmCamera());
+//        gamePort.apply();
     }
     @Override
     public void show() {
@@ -44,6 +49,11 @@ public class GameActive implements Screen {
             game.setScreen(new PauseScreen(game, this));
             this.pause();
         }
+        if(Gdx.input.isKeyPressed(62)){
+            System.out.println("SPACJA!");
+            test = new MapGenerator();
+            mapRenderer = new MapRenderer();
+        }
         if(Gdx.input.isTouched()){
 
             Vector3 mousePosition = new Vector3(0,0,0);
@@ -53,7 +63,15 @@ public class GameActive implements Screen {
             mCamera.getmCamera().translate(-deltaX, deltaY, 0);
             Vector3 mouseClickPositon = mCamera.getmCamera().unproject(mousePosition);
             System.out.println("Pozycja Myszki: "+mouseClickPositon);
+            System.out.println("Grid to:" + numberOfGrid(mousePosition));
         }
+    }
+    public int numberOfGrid(Vector3 mousePosition){
+        float x = mousePosition.x;
+        float y = mousePosition.y;
+        int w = (int)x/gridRenderer.getGrid().getCellSize();
+        int h = (int)y/gridRenderer.getGrid().getCellSize();
+        return ((h)*gridRenderer.getGrid().getMapSize())+(w);
     }
 
     @Override
@@ -69,7 +87,8 @@ public class GameActive implements Screen {
     }
     @Override
     public void resize(int width, int height) {
-        mCamera = new Camera(width,height);
+        int aspect = width/height;
+        mCamera = new Camera(width * aspect,height * aspect);
     }
 
     @Override
