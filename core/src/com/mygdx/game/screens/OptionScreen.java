@@ -4,6 +4,15 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.app.KuzniaGame;
 
 public class OptionScreen implements Screen {
@@ -15,16 +24,116 @@ public class OptionScreen implements Screen {
     Texture backActive;
     Texture checkboxUnchecked;
     Texture checkboxChecked;
-    public static int IsClicked = 1; //Sprawdza czy boks z muzyką jest "zaptaszkowany" 1 - tak, 0 - nie, domyślnie muzyka włączona(?)
+    Stage stage;
+    Drawable drawableMenu;
+    Drawable drawableBack;
+    Drawable drawableBackActive;
+    Drawable drawableCheckboxUn;
+    Drawable drawableCheckboxCh;
+    ImageButton menu;
+    ImageButton checkbox;
+    ImageButton back;
+
     public OptionScreen(KuzniaGame game){
         this.game=game;
+     loadTextures();
+     createDrawable();
+     createMenu();
+     createCheckobox();
+     createBack();
+     stage = new Stage(new ScreenViewport());
+     stage.addActor(menu);
+     stage.addActor(checkbox);
+     stage.addActor(back);
+     Gdx.input.setInputProcessor(stage);
+    }
 
-     menuHolder=new Texture("options_ingame.png");
-     backInactive=new Texture("bck_out.png");
-     backActive=new Texture("bck_in.png");
-     checkboxUnchecked=new Texture("grey_box.png");
-     checkboxChecked=new Texture("red_boxCheckmark.png");
+    private void loadTextures(){
+        menuHolder=new Texture("options_ingame.png");
+        backInactive=new Texture("bck_out.png");
+        backActive=new Texture("bck_in.png");
+        checkboxUnchecked=new Texture("grey_box.png");
+        checkboxChecked=new Texture("red_boxCheckmark.png");
+    }
 
+    private void createDrawable(){
+        drawableMenu = new TextureRegionDrawable(new TextureRegion(menuHolder));
+        drawableBack = new TextureRegionDrawable(new TextureRegion(backInactive));
+        drawableBackActive = new TextureRegionDrawable(new TextureRegion(backActive));
+        drawableCheckboxUn = new TextureRegionDrawable(new TextureRegion(checkboxUnchecked));
+        drawableCheckboxCh = new TextureRegionDrawable(new TextureRegion(checkboxChecked));
+    }
+
+    private void createMenu(){
+        menu = new ImageButton(drawableMenu);
+        menu.setPosition(Gdx.app.getGraphics().getWidth()/2 - menuHolder.getWidth()/2, Gdx.app.getGraphics().getHeight()/4);
+        menu.setSize(menuHolder.getWidth(), menuHolder.getHeight());
+    }
+
+
+    private void createCheckobox(){
+        if(!KuzniaGame.music.isPlaying())
+        {
+            checkbox = new ImageButton(drawableCheckboxUn, drawableCheckboxCh, drawableCheckboxCh);
+        }
+        else if(KuzniaGame.music.isPlaying())
+        {
+            checkbox = new ImageButton(drawableCheckboxCh, drawableCheckboxUn, drawableCheckboxUn);
+        }
+        checkbox.setPosition(Gdx.app.getGraphics().getWidth()/2 + checkboxChecked.getWidth()/2, menu.getY() + 105);
+        checkbox.addListener(new ClickListener(){
+            @Override
+            public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+                playSound();
+            }
+
+            @Override
+            public void clicked(InputEvent event, float x, float y)  {
+                checkMusic();
+            }
+        });
+    }
+
+    private void checkMusic(){
+        if(KuzniaGame.music.isPlaying()){
+            KuzniaGame.music.stop();
+            KuzniaGame.soundOn = false;
+        }
+        else if(!KuzniaGame.music.isPlaying()){
+            KuzniaGame.music.play();
+            KuzniaGame.soundOn = true;
+        }
+    }
+
+    private void createBack(){
+        back = new ImageButton(drawableBack, drawableBackActive);
+        back.setPosition(Gdx.app.getGraphics().getWidth()/2 - backInactive.getWidth()/2, menu.getY() + 10 );
+        back.setSize(backInactive.getWidth(), backInactive.getHeight());
+        back.addListener(new ClickListener(){
+            @Override
+            public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+                playSound();
+                back.getStyle().imageUp = drawableBackActive;
+            }
+
+            public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+                back.getStyle().imageUp = drawableBack;
+            }
+
+            @Override
+            public void clicked(InputEvent event, float x, float y)  {
+                game.setScreen(new MenuScreen(game));
+            }
+        });
+    }
+
+    private void playSound(){
+        if(KuzniaGame.soundOn == true){
+            KuzniaGame.pop.play();
+        }
+        else if(KuzniaGame.soundOn == false){
+
+        }
     }
 
     @Override
@@ -36,46 +145,20 @@ public class OptionScreen implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 154, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        stage.act();
+        stage.draw();
 
-
-        game.batch.begin();
-
-        game.batch.draw(menuHolder, 240, 100);
-
-        if(Gdx.input.getX() >250 && Gdx.input.getX() < 440 && Gdx.input.getY()>260 && Gdx.input.getY()<310) {
-            game.batch.draw(backActive, 250, 110);
-            if(Gdx.input.justTouched())
-            {
-                this.dispose();
-                game.setScreen(new MenuScreen(game));
-            }
-        }else game.batch.draw(backInactive, 250, 110);
-        //if sprawdzajacy czy boks jest zaznaczony
-        if(IsClicked==0) {
-            if (Gdx.input.getX() > 370 && Gdx.input.getX() < 410 && Gdx.input.getY() > 165 && Gdx.input.getY() < 205) {
-                game.batch.draw(checkboxUnchecked, 370, 205);
-                if (Gdx.input.justTouched()) {
-                    IsClicked=1;
-                    game.batch.draw(checkboxChecked, 370, 205);
-                    KuzniaGame.music.play();
-                }
-            } else game.batch.draw(checkboxUnchecked, 370, 205);
-        } else {
-            game.batch.draw(checkboxChecked, 370, 205);
-            if (Gdx.input.getX() > 370 && Gdx.input.getX() < 410 && Gdx.input.getY() > 165 && Gdx.input.getY() < 205)
-                if (Gdx.input.justTouched()) {
-                    IsClicked=0;
-                    game.batch.draw(checkboxUnchecked, 370, 205);{
-                        KuzniaGame.music.stop();
-                }
-            } else game.batch.draw(checkboxChecked, 370, 205);
-        }
-
-        game.batch.end();
     }
 
     @Override
     public void resize(int width, int height) {
+        stage.getViewport().update(width, height, true);
+        menu.setPosition(width/2 - menuHolder.getWidth()/2, height/2 - menuHolder.getHeight()/2);
+        menu.setSize(menuHolder.getWidth(), menuHolder.getHeight());
+        checkbox.setPosition(Gdx.app.getGraphics().getWidth()/2 + checkboxChecked.getWidth()/2, menu.getY() + 105);
+        checkbox.setSize(checkboxChecked.getWidth(),checkboxChecked.getHeight());
+        back.setPosition(width/2 - backInactive.getWidth()/2, menu.getY() + 10 );
+        back.setSize(backInactive.getWidth(), backInactive.getHeight());
 
     }
 

@@ -7,27 +7,37 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.screens.MainScreen;
 
 public class KuzniaGame extends Game {
-    public static Music music;
-    public SpriteBatch batch;
+	public SpriteBatch batch;
+	public static boolean soundOn = true;
+	public static Music music;
+	public static Music pop;
 
-    @Override
-    public void create() {
-        batch = new SpriteBatch();
-        this.setScreen(new MainScreen(this));
-        music = Gdx.audio.newMusic(Gdx.files.internal("mb1.ogg"));
-        music.setLooping(true);
-        music.setVolume(0.02f);
-//        music.play();
-    }
+	@Override
+	public void create () {
+		batch = new SpriteBatch();
+		this.setScreen(new MainScreen(this));
+		music = Gdx.audio.newMusic(Gdx.files.internal("mb1.ogg"));
+		music.setLooping(true);
+		music.setVolume(0.02f);
+		if(soundOn == true) {
+			music.play();
+		}
+		else if (soundOn == false){
+			music.stop();
+		}
+		pop = Gdx.audio.newMusic(Gdx.files.internal("pop.ogg"));
+		pop.setVolume(0.1f);
+	}
 
 
-    @Override
-    public void render() {
-        super.render();
-    }
+	@Override
+	public void render () {
+		super.render();
+	}
 
-    @Override
-    public void dispose() {
-        music.dispose();
-    }
+	@Override
+	public void dispose () {
+	music.dispose();
+	pop.dispose();
+	}
 }
