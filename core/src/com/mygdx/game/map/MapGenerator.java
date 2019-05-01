@@ -11,7 +11,7 @@ import java.util.Random;
 
 public class MapGenerator {
     float[][] noise;
-    HashMap<Integer,Integer> materialsize = new HashMap<Integer, Integer>();
+    int[] terrainInfo;
 
     private final int[][] SAND = {
             {1377, 1378, 1379},
@@ -43,14 +43,11 @@ public class MapGenerator {
 
     public MapGenerator() {
         propsList = new ArrayList();
-        propsList.add(DIRT);
-        propsList.add(ROCK);
-        propsList.add(SAND);
-        propsList.add(GRASS);
-        materialsize.put(0,200);
-        materialsize.put(1,200);
-        materialsize.put(2,200);
-        materialsize.put(3,200);
+        propsList.add(DIRT);//0
+        propsList.add(ROCK);//1
+        propsList.add(SAND);//2
+        propsList.add(GRASS);//3
+        terrainInfo = new int[2500];
         try {
             generateFile();
         } catch (FileNotFoundException e) {
@@ -145,37 +142,6 @@ public class MapGenerator {
         return noise;
     }
     private int getNumber(float val) {
-//        if(val >= -1.0f && val <= -0.1f) {
-//            return 0; //navy
-//        }
-//        else if(val > -0.1f && val <= 0.1f) {
-//            return 1; //blue
-//        }
-//        else if(val > 0.1f && val <= 0.6f) {
-//            return 2; //green
-//        }
-//        else if(val > 0.6f && val <= 1.0f) {
-//            return 3; //gray
-//        if (materialsize.get(1) != 0) {
-//            materialsize.put(1,materialsize.get(1)-1);
-//            return 1; //navy
-//        }else{
-//            int idMin = 0;
-//            int min = 600;
-//            for(Map.Entry<Integer, Integer> entry : materialsize.entrySet()) {
-//                Integer key = entry.getKey();
-//                Integer value = entry.getValue();
-//                if(min > value && value != 0){
-//                    min = value;
-//                    idMin = key;
-//                }
-//                // do what you have to do here
-//                // In your case, another loop.
-//            }
-//            materialsize.put(idMin,materialsize.get(idMin)-1);
-//            return idMin;
-//        }
-//        }
         if(val >= -0.25f && val <= -0.125f) {
             return 1;
         }
@@ -190,16 +156,37 @@ public class MapGenerator {
         }
         return 0;
     }
+
+    public int[] getTerrainInfo() {
+        return terrainInfo;
+    }
     public void generateFile() throws FileNotFoundException {
-        Random randGener = new Random();
-        int[][] randomeTab = new int[48][50];
-        noise = generateNoise(48, 50);
-        for (int x = 0; x < 48; x++) {
+//        Random randGener = new Random();
+        int[][] terrainTab = new int[50][50];
+        int[][] temp = new int[50][50];
+        noise = generateNoise(50, 50);
+        for (int x = 0; x < 50; x++) {
             for (int y = 0; y < 50; y++) {
 //                randomeTab[x][y] = randGener.nextInt(4);
-                randomeTab[x][y] = getNumber(noise[x][y]);
+                terrainTab[x][y] = getNumber(noise[x][y]);
             }
         }
+        System.out.println("Tworze Mape!");
+        System.out.println("--------------------------------------------------------------------");
+        for (int x = 0; x < 49; x++) {
+            for (int y = 0; y < 50; y++) {
+                terrainInfo[x*50+y] = terrainTab[48-x][y];
+                System.out.print(" "+ terrainTab[49-x][y]+ " ");
+            }
+            System.out.println();
+        }
+//        for (int x = 0; x < 50; x++) {
+//            for (int y = 0; y < 50; y++) {
+//                System.out.print(" "+terrainTab[x][y]+" ");
+//            }
+//            System.out.println();
+//        }
+
 
         PrintWriter zapis = new PrintWriter("generTest.tmx");
         zapis.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
@@ -210,7 +197,7 @@ public class MapGenerator {
         drawFill(zapis);
         //layer2 end
         //layer3 start
-        drawTerrain(zapis, randomeTab);
+        drawTerrain(zapis, terrainTab);
         //layer3 end
         //layer4 start
         drawItems1(zapis);

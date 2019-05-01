@@ -24,7 +24,6 @@ public class GameActive implements Screen {
     private GridRenderer gridRenderer;
     private MapGenerator test;
     private Hud hud;
-    private Viewport gamePort;
 
 
     public GameActive(KuzniaGame game){
@@ -34,9 +33,6 @@ public class GameActive implements Screen {
         mapRenderer = new MapRenderer();
         gridRenderer = new GridRenderer();
         hud = new Hud(game.batch,game);
-//        gamePort = new FitViewport(720, 420, mCamera.getmCamera());
-//        gamePort = new ExtendViewport(720,420,mCamera.getmCamera());
-//        gamePort.apply();
     }
     @Override
     public void show() {
@@ -63,10 +59,20 @@ public class GameActive implements Screen {
             mCamera.getmCamera().translate(-deltaX, deltaY, 0);
             Vector3 mouseClickPositon = mCamera.getmCamera().unproject(mousePosition);
             System.out.println("Pozycja Myszki: "+mouseClickPositon);
-            System.out.println("Grid to:" + numberOfGrid(mousePosition));
+            System.out.println("Grid to:" + numberOfCell(mousePosition));
+            int numbTerr = test.getTerrainInfo()[numberOfCell(mousePosition)];
+            if(numbTerr == 0){
+                System.out.println("Terren To Dirt");
+            }else if(numbTerr == 1){
+                System.out.println("Terren To Rock");
+            }else if(numbTerr == 2){
+                System.out.println("Terren To Sand");
+            }else if(numbTerr == 3){
+                System.out.println("Terren To Grass");
+            }
         }
     }
-    public int numberOfGrid(Vector3 mousePosition){
+    public int numberOfCell(Vector3 mousePosition){
         float x = mousePosition.x;
         float y = mousePosition.y;
         int w = (int)x/gridRenderer.getGrid().getCellSize();

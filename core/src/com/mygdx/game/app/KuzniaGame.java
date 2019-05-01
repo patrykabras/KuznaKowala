@@ -8,7 +8,7 @@ import com.mygdx.game.screens.MainScreen;
 
 public class KuzniaGame extends Game {
 	public SpriteBatch batch;
-	public static boolean soundOn = true;
+	public static boolean soundOn = false;
 	public static Music music;
 	public static Music pop;
 
