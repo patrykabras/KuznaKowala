@@ -1,7 +1,7 @@
 package com.mygdx.game.data.materials;
 
 public class Metal extends Material {
-    private static int Value = 0;
+    private static int Value = 200;
     private static Metal instance = new Metal();
 
     private Metal() {

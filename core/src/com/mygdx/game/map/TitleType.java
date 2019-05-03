@@ -11,8 +11,8 @@ public class TitleType {
         this.layer = (TiledMapTileLayer) tiledMap.getLayers().get(0);
     }
 
-    public TiledMapTileLayer.Cell getCell(int x,int y) {
-        return cell = layer.getCell(x,y);
+    public TiledMapTileLayer.Cell getCell(int x, int y) {
+        return cell = layer.getCell(x, y);
     }
 
 }

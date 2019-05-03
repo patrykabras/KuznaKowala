@@ -2,7 +2,6 @@ package com.mygdx.game.gird;
 
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.mygdx.game.data.buildings.Building;
-import com.mygdx.game.map.TitleType;
 
 public class Cell {
     private Building building;
