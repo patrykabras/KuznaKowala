@@ -49,8 +49,7 @@ public class PauseScreen implements Screen {
         game.batch.draw(menuHolder, 240, 100);
 
 
-        if(Gdx.input.isKeyJustPressed(131))
-        {
+        if (Gdx.input.isKeyJustPressed(131)) {
             game.setScreen(new GameActive(game));
         }
 

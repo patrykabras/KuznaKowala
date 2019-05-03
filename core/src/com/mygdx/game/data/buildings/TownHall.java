@@ -1,12 +1,12 @@
 package com.mygdx.game.data.buildings;
 
-import java.io.Serializable;
+import com.mygdx.game.data.gridData.CellsHolder;
 
 public class TownHall extends Building {
     private static final long serialVersionUID = 1L;
 
     @Override
-    public void build() {
+    public void build(CellsHolder cellsHolder) {
 
     }
 

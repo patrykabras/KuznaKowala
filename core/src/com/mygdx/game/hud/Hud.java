@@ -17,20 +17,20 @@ import com.mygdx.game.data.materials.Wood;
 
 
 public class Hud {
-    public Stage stage;
-    private Viewport viewport;
     private final KuzniaGame game;
+    public Stage stage;
+    Label woodLabel;
+    Label stoneLabel;
+    Label oreLabel;
+    private Viewport viewport;
     private Wood wood = Wood.getInstance();
     private Stone stone = Stone.getInstance();
     private Metal metal = Metal.getInstance();
     private Texture resources;
-    Label woodLabel;
-    Label stoneLabel;
-    Label oreLabel;
 
 
-    public Hud(SpriteBatch sb,KuzniaGame game){
-        this.game=game;
+    public Hud(SpriteBatch sb, KuzniaGame game) {
+        this.game = game;
         resources = new Texture("resources.png");
 
         viewport = new FitViewport(720, 420, new OrthographicCamera());
@@ -54,9 +54,10 @@ public class Hud {
         stage.addActor(table);
 
     }
-    public void showInterface(){
+
+    public void showInterface() {
         game.batch.begin();
-        game.batch.draw(resources, 0 ,361);
+        game.batch.draw(resources, 0, 361);
         game.batch.end();
         game.batch.setProjectionMatrix(this.stage.getCamera().combined);
         this.stage.draw();

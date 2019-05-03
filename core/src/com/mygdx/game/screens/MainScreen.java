@@ -11,9 +11,10 @@ public class MainScreen implements Screen {
     Texture img;
     KuzniaGame game;
 
-    public MainScreen(KuzniaGame game){
-    this.game=game;
+    public MainScreen(KuzniaGame game) {
+        this.game = game;
     }
+
     @Override
     public void show() {
         img = new Texture("logo.png");
@@ -36,6 +37,7 @@ public class MainScreen implements Screen {
             }
         }, 1);
     }
+
     @Override
     public void resize(int width, int height) {
 

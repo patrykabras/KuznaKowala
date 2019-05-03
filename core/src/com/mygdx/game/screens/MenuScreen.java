@@ -44,8 +44,8 @@ public class MenuScreen implements Screen {
     ImageButton option;
     ImageButton exit;
 
-    public MenuScreen(KuzniaGame game){
-        this.game=game;
+    public MenuScreen(KuzniaGame game) {
+        this.game = game;
         loadTextures();
         createDrawable();
         createMenu();
@@ -62,19 +62,19 @@ public class MenuScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
     }
 
-    private void loadTextures(){
-        newGameInactive=new Texture("NGout.png");
-        newGameActive=new Texture("NGin.png");
-        loadGameActive=new Texture("LGin.png");
-        loadGameInactive=new Texture("LGout.png");
-        optionsActive=new Texture("OPin.png");
-        optionsInactive=new Texture("OPout.png");
-        exitActive=new Texture("EXin.png");
-        exitInactive=new Texture("EXout.png");
-        menuHolder=new Texture("bg.png");
+    private void loadTextures() {
+        newGameInactive = new Texture("NGout.png");
+        newGameActive = new Texture("NGin.png");
+        loadGameActive = new Texture("LGin.png");
+        loadGameInactive = new Texture("LGout.png");
+        optionsActive = new Texture("OPin.png");
+        optionsInactive = new Texture("OPout.png");
+        exitActive = new Texture("EXin.png");
+        exitInactive = new Texture("EXout.png");
+        menuHolder = new Texture("bg.png");
     }
 
-    private void createDrawable(){
+    private void createDrawable() {
         drawableMenu = new TextureRegionDrawable(new TextureRegion(menuHolder));
         drawableNewGame = new TextureRegionDrawable(new TextureRegion(newGameInactive));
         drawableNewGameActive = new TextureRegionDrawable(new TextureRegion(newGameActive));
@@ -85,17 +85,18 @@ public class MenuScreen implements Screen {
         drawableExit = new TextureRegionDrawable(new TextureRegion(exitInactive));
         drawableExitActive = new TextureRegionDrawable(new TextureRegion(exitActive));
     }
-    private void createMenu(){
+
+    private void createMenu() {
         menu = new ImageButton(drawableMenu);
-        menu.setPosition(Gdx.app.getGraphics().getWidth()/2 - menuHolder.getWidth()/2, Gdx.app.getGraphics().getHeight()/4);
+        menu.setPosition(Gdx.app.getGraphics().getWidth() / 2 - menuHolder.getWidth() / 2, Gdx.app.getGraphics().getHeight() / 4);
         menu.setSize(menuHolder.getWidth(), menuHolder.getHeight());
     }
 
-    private void createNewGame(){
+    private void createNewGame() {
         newGame = new ImageButton(drawableNewGame, drawableNewGameActive, drawableNewGameActive);
-        newGame.setPosition(Gdx.app.getGraphics().getWidth()/2 - newGameInactive.getWidth()/2, menu.getY() - newGameInactive.getHeight() + 210);
+        newGame.setPosition(Gdx.app.getGraphics().getWidth() / 2 - newGameInactive.getWidth() / 2, menu.getY() - newGameInactive.getHeight() + 210);
         newGame.setSize(newGameInactive.getWidth(), newGameInactive.getHeight());
-        newGame.addListener(new ClickListener(){
+        newGame.addListener(new ClickListener() {
             @Override
             public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
                 playSound();
@@ -108,17 +109,17 @@ public class MenuScreen implements Screen {
             }
 
             @Override
-            public void clicked(InputEvent event, float x, float y)  {
+            public void clicked(InputEvent event, float x, float y) {
                 game.setScreen(new GameActive(game));
             }
         });
     }
 
-    private void createLoad(){
+    private void createLoad() {
         load = new ImageButton(drawableLoadGame, drawableLoadGameActive);
-        load.setPosition(Gdx.app.getGraphics().getWidth()/2 - loadGameInactive.getWidth()/2, newGame.getY() - 50);
+        load.setPosition(Gdx.app.getGraphics().getWidth() / 2 - loadGameInactive.getWidth() / 2, newGame.getY() - 50);
         load.setSize(loadGameInactive.getWidth(), loadGameInactive.getHeight());
-        load.addListener(new ClickListener(){
+        load.addListener(new ClickListener() {
             @Override
             public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
                 playSound();
@@ -131,17 +132,17 @@ public class MenuScreen implements Screen {
             }
 
             @Override
-            public void clicked(InputEvent event, float x, float y)  {
+            public void clicked(InputEvent event, float x, float y) {
                 //wywolanie wczytania gry
             }
         });
     }
 
-    private void createOptions(){
+    private void createOptions() {
         option = new ImageButton(drawableOptions, drawableOptionsActive);
-        option.setPosition(Gdx.app.getGraphics().getWidth()/2 - optionsInactive.getWidth()/2, load.getY() - 50);
+        option.setPosition(Gdx.app.getGraphics().getWidth() / 2 - optionsInactive.getWidth() / 2, load.getY() - 50);
         option.setSize(optionsInactive.getWidth(), optionsInactive.getHeight());
-        option.addListener(new ClickListener(){
+        option.addListener(new ClickListener() {
             @Override
             public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
                 playSound();
@@ -154,17 +155,17 @@ public class MenuScreen implements Screen {
             }
 
             @Override
-            public void clicked(InputEvent event, float x, float y)  {
+            public void clicked(InputEvent event, float x, float y) {
                 game.setScreen(new OptionScreen(game));
             }
         });
     }
 
-    private void createExit(){
+    private void createExit() {
         exit = new ImageButton(drawableExit, drawableExitActive);
-        exit.setPosition(Gdx.app.getGraphics().getWidth()/2 - exitInactive.getWidth()/2, option.getY() - 50);
+        exit.setPosition(Gdx.app.getGraphics().getWidth() / 2 - exitInactive.getWidth() / 2, option.getY() - 50);
         exit.setSize(exitInactive.getWidth(), exitInactive.getHeight());
-        exit.addListener(new ClickListener(){
+        exit.addListener(new ClickListener() {
             @Override
             public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
                 playSound();
@@ -177,17 +178,16 @@ public class MenuScreen implements Screen {
             }
 
             @Override
-            public void clicked(InputEvent event, float x, float y)  {
+            public void clicked(InputEvent event, float x, float y) {
                 Gdx.app.exit();
             }
         });
     }
 
-    private void playSound(){
-        if(KuzniaGame.soundOn == true){
+    private void playSound() {
+        if (KuzniaGame.soundOn == true) {
             KuzniaGame.pop.play();
-        }
-        else if(KuzniaGame.soundOn == false){
+        } else if (KuzniaGame.soundOn == false) {
 
         }
     }
@@ -204,18 +204,19 @@ public class MenuScreen implements Screen {
         stage.act();
         stage.draw();
     }
+
     @Override
     public void resize(int width, int height) {
         stage.getViewport().update(width, height, true);
-        menu.setPosition(width/2 - menuHolder.getWidth()/2, height/2 - menuHolder.getHeight()/2);
+        menu.setPosition(width / 2 - menuHolder.getWidth() / 2, height / 2 - menuHolder.getHeight() / 2);
         menu.setSize(menuHolder.getWidth(), menuHolder.getHeight());
-        newGame.setPosition(width/2 - newGameInactive.getWidth()/2, menu.getY() - newGameInactive.getHeight() + 210);
+        newGame.setPosition(width / 2 - newGameInactive.getWidth() / 2, menu.getY() - newGameInactive.getHeight() + 210);
         newGame.setSize(newGameInactive.getWidth(), newGameInactive.getHeight());
-        load.setPosition(width/2 - loadGameInactive.getWidth()/2, newGame.getY() - 50);
+        load.setPosition(width / 2 - loadGameInactive.getWidth() / 2, newGame.getY() - 50);
         load.setSize(loadGameInactive.getWidth(), loadGameInactive.getHeight());
-        option.setPosition(width/2 - optionsInactive.getWidth()/2, load.getY() - 50);
+        option.setPosition(width / 2 - optionsInactive.getWidth() / 2, load.getY() - 50);
         option.setSize(optionsInactive.getWidth(), optionsInactive.getHeight());
-        exit.setPosition(width/2 - exitInactive.getWidth()/2, option.getY() - 50);
+        exit.setPosition(width / 2 - exitInactive.getWidth() / 2, option.getY() - 50);
         exit.setSize(exitInactive.getWidth(), exitInactive.getHeight());
     }
 

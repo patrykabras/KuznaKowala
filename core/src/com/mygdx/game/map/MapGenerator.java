@@ -5,14 +5,8 @@ import com.badlogic.gdx.math.MathUtils;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
 
 public class MapGenerator {
-    float[][] noise;
-    int[] terrainInfo;
-
     private final int[][] SAND = {
             {1377, 1378, 1379},
             {1409, 1410, 1411},
@@ -39,6 +33,8 @@ public class MapGenerator {
             {2014, 2015, 2016},
             {2046, 2047, 2048}
     };
+    float[][] noise;
+    int[] terrainInfo;
     private ArrayList<int[][]> propsList;
 
     public MapGenerator() {
@@ -128,9 +124,9 @@ public class MapGenerator {
         //Weight = smoothness. Higher frequency = more smoothness
         float weight = 1;
 
-        for(int i = 0; i < 4; i++) {
-            for(int x = 0; x < width; x++) {
-                for(int y = 0; y < height; y++) {
+        for (int i = 0; i < 4; i++) {
+            for (int x = 0; x < width; x++) {
+                for (int y = 0; y < height; y++) {
                     noise[x][y] += (float) SimplexNoise.noise(x * layerF, y * layerF) * weight;
                     noise[x][y] = MathUtils.clamp(noise[x][y], -0.25f, 0.25f);
                 }
@@ -141,18 +137,16 @@ public class MapGenerator {
 
         return noise;
     }
+
     private int getNumber(float val) {
-        if(val >= -0.25f && val <= -0.125f) {
+        if (val >= -0.25f && val <= -0.125f) {
             return 1;
-        }
-        else if(val > -0.125f && val <= 0.0f) {
+        } else if (val > -0.125f && val <= 0.0f) {
             return 2;
-        }
-        else if(val > 0.0f && val <= 0.125f) {
+        } else if (val > 0.0f && val <= 0.125f) {
             return 3;
-        }
-        else if(val > 0.125f && val <= 0.25f) {
-           return 0;
+        } else if (val > 0.125f && val <= 0.25f) {
+            return 0;
         }
         return 0;
     }
@@ -160,6 +154,7 @@ public class MapGenerator {
     public int[] getTerrainInfo() {
         return terrainInfo;
     }
+
     public void generateFile() throws FileNotFoundException {
 //        Random randGener = new Random();
         int[][] terrainTab = new int[50][50];
@@ -175,8 +170,8 @@ public class MapGenerator {
         System.out.println("--------------------------------------------------------------------");
         for (int x = 0; x < 49; x++) {
             for (int y = 0; y < 50; y++) {
-                terrainInfo[x*50+y] = terrainTab[48-x][y];
-                System.out.print(" "+ terrainTab[49-x][y]+ " ");
+                terrainInfo[x * 50 + y] = terrainTab[48 - x][y];
+                System.out.print(" " + terrainTab[49 - x][y] + " ");
             }
             System.out.println();
         }

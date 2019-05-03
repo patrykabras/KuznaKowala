@@ -1,8 +1,8 @@
 package com.mygdx.game.exceptions;
 
-public class NoSuchBuildingException extends RuntimeException{
+public class NoSuchBuildingException extends RuntimeException {
 
-    public NoSuchBuildingException(String message){
+    public NoSuchBuildingException(String message) {
         super("message");
     }
 }

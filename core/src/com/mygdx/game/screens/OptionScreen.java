@@ -34,29 +34,29 @@ public class OptionScreen implements Screen {
     ImageButton checkbox;
     ImageButton back;
 
-    public OptionScreen(KuzniaGame game){
-        this.game=game;
-     loadTextures();
-     createDrawable();
-     createMenu();
-     createCheckobox();
-     createBack();
-     stage = new Stage(new ScreenViewport());
-     stage.addActor(menu);
-     stage.addActor(checkbox);
-     stage.addActor(back);
-     Gdx.input.setInputProcessor(stage);
+    public OptionScreen(KuzniaGame game) {
+        this.game = game;
+        loadTextures();
+        createDrawable();
+        createMenu();
+        createCheckobox();
+        createBack();
+        stage = new Stage(new ScreenViewport());
+        stage.addActor(menu);
+        stage.addActor(checkbox);
+        stage.addActor(back);
+        Gdx.input.setInputProcessor(stage);
     }
 
-    private void loadTextures(){
-        menuHolder=new Texture("options_ingame.png");
-        backInactive=new Texture("bck_out.png");
-        backActive=new Texture("bck_in.png");
-        checkboxUnchecked=new Texture("grey_box.png");
-        checkboxChecked=new Texture("red_boxCheckmark.png");
+    private void loadTextures() {
+        menuHolder = new Texture("options_ingame.png");
+        backInactive = new Texture("bck_out.png");
+        backActive = new Texture("bck_in.png");
+        checkboxUnchecked = new Texture("grey_box.png");
+        checkboxChecked = new Texture("red_boxCheckmark.png");
     }
 
-    private void createDrawable(){
+    private void createDrawable() {
         drawableMenu = new TextureRegionDrawable(new TextureRegion(menuHolder));
         drawableBack = new TextureRegionDrawable(new TextureRegion(backInactive));
         drawableBackActive = new TextureRegionDrawable(new TextureRegion(backActive));
@@ -64,52 +64,48 @@ public class OptionScreen implements Screen {
         drawableCheckboxCh = new TextureRegionDrawable(new TextureRegion(checkboxChecked));
     }
 
-    private void createMenu(){
+    private void createMenu() {
         menu = new ImageButton(drawableMenu);
-        menu.setPosition(Gdx.app.getGraphics().getWidth()/2 - menuHolder.getWidth()/2, Gdx.app.getGraphics().getHeight()/4);
+        menu.setPosition(Gdx.app.getGraphics().getWidth() / 2 - menuHolder.getWidth() / 2, Gdx.app.getGraphics().getHeight() / 4);
         menu.setSize(menuHolder.getWidth(), menuHolder.getHeight());
     }
 
 
-    private void createCheckobox(){
-        if(!KuzniaGame.music.isPlaying())
-        {
+    private void createCheckobox() {
+        if (!KuzniaGame.music.isPlaying()) {
             checkbox = new ImageButton(drawableCheckboxUn, drawableCheckboxCh, drawableCheckboxCh);
-        }
-        else if(KuzniaGame.music.isPlaying())
-        {
+        } else if (KuzniaGame.music.isPlaying()) {
             checkbox = new ImageButton(drawableCheckboxCh, drawableCheckboxUn, drawableCheckboxUn);
         }
-        checkbox.setPosition(Gdx.app.getGraphics().getWidth()/2 + checkboxChecked.getWidth()/2, menu.getY() + 105);
-        checkbox.addListener(new ClickListener(){
+        checkbox.setPosition(Gdx.app.getGraphics().getWidth() / 2 + checkboxChecked.getWidth() / 2, menu.getY() + 105);
+        checkbox.addListener(new ClickListener() {
             @Override
             public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
                 playSound();
             }
 
             @Override
-            public void clicked(InputEvent event, float x, float y)  {
+            public void clicked(InputEvent event, float x, float y) {
                 checkMusic();
             }
         });
     }
 
-    private void checkMusic(){
-        if(KuzniaGame.music.isPlaying()){
+    private void checkMusic() {
+        if (KuzniaGame.music.isPlaying()) {
             KuzniaGame.music.stop();
             KuzniaGame.soundOn = false;
-        }
-        else if(!KuzniaGame.music.isPlaying()){
+        } else if (!KuzniaGame.music.isPlaying()) {
             KuzniaGame.music.play();
             KuzniaGame.soundOn = true;
         }
     }
 
-    private void createBack(){
+    private void createBack() {
         back = new ImageButton(drawableBack, drawableBackActive);
-        back.setPosition(Gdx.app.getGraphics().getWidth()/2 - backInactive.getWidth()/2, menu.getY() + 10 );
+        back.setPosition(Gdx.app.getGraphics().getWidth() / 2 - backInactive.getWidth() / 2, menu.getY() + 10);
         back.setSize(backInactive.getWidth(), backInactive.getHeight());
-        back.addListener(new ClickListener(){
+        back.addListener(new ClickListener() {
             @Override
             public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
                 playSound();
@@ -121,17 +117,16 @@ public class OptionScreen implements Screen {
             }
 
             @Override
-            public void clicked(InputEvent event, float x, float y)  {
+            public void clicked(InputEvent event, float x, float y) {
                 game.setScreen(new MenuScreen(game));
             }
         });
     }
 
-    private void playSound(){
-        if(KuzniaGame.soundOn == true){
+    private void playSound() {
+        if (KuzniaGame.soundOn == true) {
             KuzniaGame.pop.play();
-        }
-        else if(KuzniaGame.soundOn == false){
+        } else if (KuzniaGame.soundOn == false) {
 
         }
     }
@@ -153,11 +148,11 @@ public class OptionScreen implements Screen {
     @Override
     public void resize(int width, int height) {
         stage.getViewport().update(width, height, true);
-        menu.setPosition(width/2 - menuHolder.getWidth()/2, height/2 - menuHolder.getHeight()/2);
+        menu.setPosition(width / 2 - menuHolder.getWidth() / 2, height / 2 - menuHolder.getHeight() / 2);
         menu.setSize(menuHolder.getWidth(), menuHolder.getHeight());
-        checkbox.setPosition(Gdx.app.getGraphics().getWidth()/2 + checkboxChecked.getWidth()/2, menu.getY() + 105);
-        checkbox.setSize(checkboxChecked.getWidth(),checkboxChecked.getHeight());
-        back.setPosition(width/2 - backInactive.getWidth()/2, menu.getY() + 10 );
+        checkbox.setPosition(Gdx.app.getGraphics().getWidth() / 2 + checkboxChecked.getWidth() / 2, menu.getY() + 105);
+        checkbox.setSize(checkboxChecked.getWidth(), checkboxChecked.getHeight());
+        back.setPosition(width / 2 - backInactive.getWidth() / 2, menu.getY() + 10);
         back.setSize(backInactive.getWidth(), backInactive.getHeight());
 
     }
