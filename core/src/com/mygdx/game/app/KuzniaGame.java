@@ -19,13 +19,13 @@ public class KuzniaGame extends Game {
         music = Gdx.audio.newMusic(Gdx.files.internal("mb1.ogg"));
         music.setLooping(true);
         music.setVolume(0.02f);
-        if (soundOn == true) {
+        if (soundOn) {
             music.play();
-        } else if (soundOn == false) {
+        } else{
             music.stop();
         }
         pop = Gdx.audio.newMusic(Gdx.files.internal("pop.ogg"));
-        pop.setVolume(0.1f);
+        pop.setVolume(0.5f);
     }
 
 

@@ -1,23 +1,35 @@
 package com.mygdx.game.data.buildings;
 
-import com.mygdx.game.data.gridData.CellsHolder;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.camera.Camera;
 import com.mygdx.game.data.materials.Metal;
 //import sun.awt.SunToolkit;
 
 public class MetalMine extends Building {
     private static final long serialVersionUID = 3L;
     private static final int VALUE_INCREASE = 20;
+    private SpriteBatch spriteBatch = new SpriteBatch();
+    private Texture texture = new Texture("MetalTemp.png");
+    Metal metal = Metal.getInstance();
+
     private int lvl = 1;
 
-    @Override
-    public void build(CellsHolder cellsHolder) {
-        cellsHolder = CellsHolder.getInstance();
+    MetalMine() {
+        System.out.println("MetalMine has been build!");
+    }
 
+    @Override
+    public void build(Camera camera) {
+        spriteBatch.setProjectionMatrix(camera.getmCamera().combined);
+        spriteBatch.begin();
+        spriteBatch.draw(texture, x, y);
+        spriteBatch.end();
     }
 
     @Override
     public void destroy() {
-
+        spriteBatch.dispose();
     }
 
     @Override
@@ -27,8 +39,6 @@ public class MetalMine extends Building {
 
     @Override
     public void working() {
-        Metal metal = Metal.getInstance();
-        metal.increasedValue(VALUE_INCREASE * lvl);
-
+        metal.increasedValue(VALUE_INCREASE*lvl);
     }
 }

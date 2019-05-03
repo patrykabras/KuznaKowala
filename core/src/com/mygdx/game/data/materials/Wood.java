@@ -1,7 +1,7 @@
 package com.mygdx.game.data.materials;
 
 public class Wood extends Material {
-    private static int Value = 200;
+    private volatile static int Value = 200;
     private static Wood instance = new Wood();
 
     private Wood() {
@@ -16,12 +16,12 @@ public class Wood extends Material {
     }
 
     @Override
-    public void increasedValue(int increasedAmount) {
+    public synchronized void increasedValue(int increasedAmount) {
         this.Value += increasedAmount;
     }
 
     @Override
-    public void decreasedValue(int decreasedAmount) {
+    public synchronized void decreasedValue(int decreasedAmount) {
         this.Value -= decreasedAmount;
     }
 }

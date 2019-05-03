@@ -1,7 +1,7 @@
 package com.mygdx.game.data.materials;
 
 public class Stone extends Material {
-    private static int Value = 200;
+    private volatile static int Value = 200;
     private static Stone instance = new Stone();
 
     private Stone() {
@@ -16,12 +16,12 @@ public class Stone extends Material {
     }
 
     @Override
-    public void increasedValue(int increasedAmount) {
+    public synchronized void increasedValue(int increasedAmount) {
         Value += increasedAmount;
     }
 
     @Override
-    public void decreasedValue(int decreasedAmount) {
+    public synchronized void decreasedValue(int decreasedAmount) {
         Value -= decreasedAmount;
     }
 }
