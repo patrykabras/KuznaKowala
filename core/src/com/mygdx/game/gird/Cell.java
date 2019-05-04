@@ -1,11 +1,14 @@
 package com.mygdx.game.gird;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.mygdx.game.data.buildings.Building;
 
 public class Cell {
-    private Building building;
+    private Building building = null;
     private TiledMapTileLayer.Cell titleInfo;
+
 
     public TiledMapTileLayer.Cell getTitleInfo() {
         return titleInfo;
