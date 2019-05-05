@@ -4,8 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.utils.TimeUtils;
-import com.badlogic.gdx.utils.Timer;
 import com.mygdx.game.camera.Camera;
 import com.mygdx.game.data.buildings.Building;
 import com.mygdx.game.data.buildings.BuildingFactory;
@@ -13,7 +11,6 @@ import com.mygdx.game.data.gridData.CellsHolder;
 import com.mygdx.game.data.materials.Metal;
 import com.mygdx.game.data.materials.Stone;
 import com.mygdx.game.data.materials.Wood;
-import com.mygdx.game.exceptions.NoSuchTerritoryTypeException;
 import com.mygdx.game.gird.Cell;
 import com.mygdx.game.gird.GridRenderer;
 import com.mygdx.game.gird.MapGrid;
@@ -21,12 +18,12 @@ import com.mygdx.game.hud.Hud;
 import com.mygdx.game.map.MapGenerator;
 import com.mygdx.game.map.MapRenderer;
 import com.mygdx.game.screens.PauseScreen;
-import javafx.concurrent.Task;
 
 public class GameActive implements Screen {
 
     private final KuzniaGame game;
     BuildingFactory buildingFactory = new BuildingFactory();
+    float timeState = 0f;
     private CellsHolder cellsHolder = CellsHolder.getInstance();
     private Cell[][] cells = cellsHolder.getCells();
     private Camera mCamera;
@@ -99,39 +96,40 @@ public class GameActive implements Screen {
         System.out.println("Row: " + row);
 
         Building building = null;
-        try{
-        if (cells[col][row].getBuilding() == null) {
-            switch (numbTerr) {
-                case 0:
-                    if(stone.getValue()>=stoneMineCost) {
-                        building = buildingFactory.createNewBuilding("stonemine");
-                        stone.decreasedValue(stoneMineCost);
-                        stoneMineCost+=20;
-                    }
-                    break;
-                case 1:
-                    if(metal.getValue()>=metalMineCost) {
-                        building = buildingFactory.createNewBuilding("metalmine");
-                        metal.decreasedValue(metalMineCost);
-                        metalMineCost+=20;
-                    }
-                    break;
-                case 3:
-                    if(wood.getValue()>=woodCutterCost) {
-                        building = buildingFactory.createNewBuilding("woodcutter");
-                        wood.decreasedValue(woodCutterCost);
-                        woodCutterCost+=20;
-                    }
-                    break;
-                default:
-                    System.out.println("Ten typ nie jest zdefiniowany");
-            }
+        try {
+            if (cells[col][row].getBuilding() == null && col >=2 && col <= 47 && row >= 2 && row <=47) {
+                switch (numbTerr) {
+                    case 0:
+                        if (stone.getValue() >= stoneMineCost) {
+                            building = buildingFactory.createNewBuilding("stonemine");
+                            stone.decreasedValue(stoneMineCost);
+                            stoneMineCost += 20;
+                        }
+                        break;
+                    case 1:
+                        if (metal.getValue() >= metalMineCost) {
+                            building = buildingFactory.createNewBuilding("metalmine");
+                            metal.decreasedValue(metalMineCost);
+                            metalMineCost += 20;
+                        }
+                        break;
+                    case 3:
+                        if (wood.getValue() >= woodCutterCost) {
+                            building = buildingFactory.createNewBuilding("woodcutter");
+                            wood.decreasedValue(woodCutterCost);
+                            woodCutterCost += 20;
+                        }
+                        break;
+                    default:
+                        System.out.println("Ten typ nie jest zdefiniowany");
+                }
 
-            building.setX(row*MapGrid.getCellSize()+8);
-            building.setY(col*MapGrid.getCellSize()+8);
-            cells[col][row].setBuilding(building);
-            cellsHolder.setCells(cells);
-        }}catch (NullPointerException e){
+                building.setX(row * MapGrid.getCellSize() + 8);
+                building.setY(col * MapGrid.getCellSize() + 8);
+                cells[col][row].setBuilding(building);
+                cellsHolder.setCells(cells);
+            }
+        } catch (NullPointerException e) {
             System.out.println("Nothing happend");
         }
     }
@@ -144,34 +142,33 @@ public class GameActive implements Screen {
         return ((h) * MapGrid.getMapSize()) + (w);
     }
 
-    float timeState = 0f;
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(255, 255, 255, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         mapRenderer.startUp(mCamera);
         gridRenderer.start(mCamera);
-        hud = new Hud(game.batch,game);
+        hud = new Hud(game.batch, game);
         hud.showInterface();
 
         /*odpowiada za renderowanie textur komorki*/
-        for (int i = 0; i <50 ; i++) {
-            for (int j = 0; j <50 ; j++) {
-                if(cells[i][j].getBuilding()!=null){
+        for (int i = 2; i <= 47; i++) {
+            for (int j = 2; j <= 47; j++) {
+                if (cells[i][j].getBuilding() != null) {
                     cells[i][j].getBuilding().build(mCamera);
                 }
             }
         }
 
         /*zmiana wartosci materialu*/
-        timeState+=Gdx.graphics.getDeltaTime();
-        if(timeState>=3f){
+        timeState += Gdx.graphics.getDeltaTime();
+        if (timeState >= 3f) { //Co ile sekund ma sie odswiezac
 
-            timeState=0f;
+            timeState = 0f;
 
-            for (int i = 0; i <50 ; i++) {
-                for (int j = 0; j <50 ; j++) {
-                    if(cells[i][j].getBuilding()!=null){
+            for (int i = 2; i <= 47; i++) {
+                for (int j = 2; j <= 47; j++) {
+                    if (cells[i][j].getBuilding() != null) {
                         cells[i][j].getBuilding().working();
                     }
                 }

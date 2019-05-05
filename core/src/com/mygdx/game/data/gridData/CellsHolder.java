@@ -18,6 +18,7 @@ public class CellsHolder {
     }
 
     public synchronized static CellsHolder getInstance() {
+
         return instance;
     }
 
