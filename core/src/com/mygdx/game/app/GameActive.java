@@ -22,6 +22,8 @@ import com.mygdx.game.screens.PauseScreen;
 public class GameActive implements Screen {
 
     private final KuzniaGame game;
+    private final int ACTUAL_WORKING_MAP_BEGGINIG = 2;
+    private final int ACTUAL_WORKING_MAP_ENDING = 47;
     BuildingFactory buildingFactory = new BuildingFactory();
     float timeState = 0f;
     private CellsHolder cellsHolder = CellsHolder.getInstance();
@@ -61,6 +63,7 @@ public class GameActive implements Screen {
             System.out.println("SPACJA!");
             test = new MapGenerator();
             mapRenderer = new MapRenderer();
+            resetCellsAndValues();
         }
         if (Gdx.input.isTouched()) {
 
@@ -97,7 +100,11 @@ public class GameActive implements Screen {
 
         Building building = null;
         try {
-            if (cells[col][row].getBuilding() == null && col >=2 && col <= 47 && row >= 2 && row <=47) {
+            if (cells[col][row].getBuilding() == null
+                    && col >= ACTUAL_WORKING_MAP_BEGGINIG
+                    && col <= ACTUAL_WORKING_MAP_ENDING
+                    && row >= ACTUAL_WORKING_MAP_BEGGINIG &&
+                    row <= ACTUAL_WORKING_MAP_ENDING) {
                 switch (numbTerr) {
                     case 0:
                         if (stone.getValue() >= stoneMineCost) {
@@ -134,6 +141,18 @@ public class GameActive implements Screen {
         }
     }
 
+    private void resetCellsAndValues(){
+        for (int i = 0; i < 50; i++) {
+            for (int j = 0; j <50; j++) {
+                cells[i][j].setBuilding(null);
+            }
+        }
+        cellsHolder.setCells(cells);
+        metal.reset();
+        wood.reset();
+        stone.reset();
+    }
+
     public int numberOfCell(Vector3 mousePosition) {
         float x = mousePosition.x;
         float y = mousePosition.y;
@@ -152,8 +171,8 @@ public class GameActive implements Screen {
         hud.showInterface();
 
         /*odpowiada za renderowanie textur komorki*/
-        for (int i = 2; i <= 47; i++) {
-            for (int j = 2; j <= 47; j++) {
+        for (int i = ACTUAL_WORKING_MAP_BEGGINIG; i <= ACTUAL_WORKING_MAP_ENDING; i++) {
+            for (int j = ACTUAL_WORKING_MAP_BEGGINIG; j <= ACTUAL_WORKING_MAP_ENDING; j++) {
                 if (cells[i][j].getBuilding() != null) {
                     cells[i][j].getBuilding().build(mCamera);
                 }
@@ -166,8 +185,8 @@ public class GameActive implements Screen {
 
             timeState = 0f;
 
-            for (int i = 2; i <= 47; i++) {
-                for (int j = 2; j <= 47; j++) {
+            for (int i = ACTUAL_WORKING_MAP_BEGGINIG; i <= ACTUAL_WORKING_MAP_ENDING; i++) {
+                for (int j = ACTUAL_WORKING_MAP_BEGGINIG; j <= ACTUAL_WORKING_MAP_ENDING; j++) {
                     if (cells[i][j].getBuilding() != null) {
                         cells[i][j].getBuilding().working();
                     }

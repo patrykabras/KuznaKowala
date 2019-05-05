@@ -1,8 +1,8 @@
 package com.mygdx.game.data.materials;
 
 public class Metal extends Material {
-    private volatile static int Value = 200;
     private static Metal instance = new Metal();
+    private int value = DEFAULT_VALUE;
 
     private Metal() {
     }
@@ -12,16 +12,21 @@ public class Metal extends Material {
     }
 
     public int getValue() {
-        return Value;
+        return value;
+    }
+
+    @Override
+    public void reset() {
+        value = DEFAULT_VALUE;
     }
 
     @Override
     public synchronized void increasedValue(int increasedAmount) {
-        Value += increasedAmount;
+        value += increasedAmount;
     }
 
     @Override
     public synchronized void decreasedValue(int decreasedAmount) {
-        Value -= decreasedAmount;
+        value -= decreasedAmount;
     }
 }
