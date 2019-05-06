@@ -42,6 +42,7 @@ public class GameActive implements Screen {
 
     public GameActive(KuzniaGame game) {
         this.game = game;
+        hud = new Hud(game.batch, game);
         mCamera = new Camera();
         test = new MapGenerator();
         mapRenderer = new MapRenderer();
@@ -167,7 +168,6 @@ public class GameActive implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         mapRenderer.startUp(mCamera);
         gridRenderer.start(mCamera);
-        hud = new Hud(game.batch, game);
         hud.showInterface();
 
         /*odpowiada za renderowanie textur komorki*/
