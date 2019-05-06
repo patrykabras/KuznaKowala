@@ -1,6 +1,7 @@
 package com.mygdx.game.app;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.math.Vector3;
@@ -66,18 +67,18 @@ public class GameActive implements Screen {
             mapRenderer = new MapRenderer();
             resetCellsAndValues();
         }
-        if (Gdx.input.isTouched()) {
 
+
+        if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) || Gdx.input.isButtonPressed(Input.Buttons.RIGHT)) {
             Vector3 mousePosition = new Vector3(0, 0, 0);
             mousePosition.set(Gdx.input.getX(), Gdx.input.getY(), 0);
             float deltaX = (float) Gdx.input.getDeltaX();
             float deltaY = (float) Gdx.input.getDeltaY();
             mCamera.getmCamera().translate(-deltaX, deltaY, 0);
             Vector3 mouseClickPositon = mCamera.getmCamera().unproject(mousePosition);
+            int numbTerr = test.getTerrainInfo()[numberOfCell(mousePosition)];
             System.out.println("Pozycja Myszki: " + mouseClickPositon);
             System.out.println("Grid to:" + numberOfCell(mousePosition));
-            int numbTerr = test.getTerrainInfo()[numberOfCell(mousePosition)];
-
             if (numbTerr == 0) {
                 System.out.println("Terren To Dirt");
             } else if (numbTerr == 1) {
@@ -88,7 +89,32 @@ public class GameActive implements Screen {
                 System.out.println("Terren To Grass");
             }
 
-            buildInCell(mouseClickPositon, numbTerr);
+            if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
+                buildInCell(mouseClickPositon, numbTerr);
+            } else if (Gdx.input.isButtonPressed(Input.Buttons.RIGHT))
+                removeBuildingFromCell(mouseClickPositon);
+
+        }
+    }
+
+    private void removeBuildingFromCell(Vector3 mousePosition) {
+        int row = (int) mousePosition.x / MapGrid.getCellSize();
+        int col = (int) mousePosition.y / MapGrid.getCellSize();
+
+        System.out.println("Column: " + col);
+        System.out.println("Row: " + row);
+
+        try {
+            if (    col >= ACTUAL_WORKING_MAP_BEGGINIG
+                    && col <= ACTUAL_WORKING_MAP_ENDING
+                    && row >= ACTUAL_WORKING_MAP_BEGGINIG &&
+                    row <= ACTUAL_WORKING_MAP_ENDING) {
+
+                cells[col][row].setBuilding(null);
+                cellsHolder.setCells(cells);
+            }
+        } catch (NullPointerException e) {
+            System.out.println("Nothing happned");
         }
     }
 
@@ -142,9 +168,9 @@ public class GameActive implements Screen {
         }
     }
 
-    private void resetCellsAndValues(){
+    private void resetCellsAndValues() {
         for (int i = 0; i < 50; i++) {
-            for (int j = 0; j <50; j++) {
+            for (int j = 0; j < 50; j++) {
                 cells[i][j].setBuilding(null);
             }
         }
