@@ -43,9 +43,11 @@ public class PauseScreen implements Screen {
     ImageButton save;
     ImageButton option;
     ImageButton exit;
+    GameActive gameActive;
 
-    public PauseScreen(KuzniaGame game) {
+    public PauseScreen(KuzniaGame game, GameActive gameActive) {
         this.game = game;
+        this.gameActive = gameActive;
         loadTextures();
         createDrawable();
         createMenu();
@@ -110,7 +112,7 @@ public class PauseScreen implements Screen {
 
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new GameActive(game));
+                game.setScreen(gameActive);
                 dispose();
             }
         });
