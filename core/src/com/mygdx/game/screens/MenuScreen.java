@@ -111,6 +111,7 @@ public class MenuScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 game.setScreen(new GameActive(game));
+                dispose();
             }
         });
     }
@@ -133,7 +134,8 @@ public class MenuScreen implements Screen {
 
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                //wywolanie wczytania gry
+                //wywolanie wczytania gry, po zaimplenetowaniu odkomentowac dispose
+                //dispose();
             }
         });
     }
@@ -157,6 +159,7 @@ public class MenuScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 game.setScreen(new OptionScreen(game));
+                dispose();
             }
         });
     }
@@ -237,6 +240,7 @@ public class MenuScreen implements Screen {
 
     @Override
     public void dispose() {
+
         newGameInactive.dispose();
         newGameActive.dispose();
         loadGameActive.dispose();
@@ -249,4 +253,5 @@ public class MenuScreen implements Screen {
         menuHolder.dispose();
         stage.dispose();
     }
+
 }

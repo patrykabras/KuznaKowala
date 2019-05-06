@@ -56,6 +56,9 @@ public class Hud {
     }
 
     public void showInterface() {
+        woodLabel.setText(wood.getValue());
+        stoneLabel.setText(stone.getValue());
+        oreLabel.setText(metal.getValue());
         game.batch.begin();
         game.batch.draw(resources, 0, 361);
         game.batch.end();
