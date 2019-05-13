@@ -41,6 +41,24 @@ public class GameActive implements Screen {
     private int stoneMineCost = 20;
     private int woodCutterCost = 20;
 
+    private enum TerrainType {
+        DIRT(0), ROCK(1), SAND(2), GRASS(3);
+
+        private final int value;
+
+        private TerrainType(int x) {
+            this.value = x;
+        }
+
+        public int getValue() {
+            return value;
+        }
+
+        static TerrainType createFromInt(int option) {
+            return TerrainType.values()[option];
+        }
+    }
+
     public GameActive(KuzniaGame game) {
         this.game = game;
         hud = new Hud(game.batch, game);
@@ -76,21 +94,28 @@ public class GameActive implements Screen {
             float deltaY = (float) Gdx.input.getDeltaY();
             mCamera.getmCamera().translate(-deltaX, deltaY, 0);
             Vector3 mouseClickPositon = mCamera.getmCamera().unproject(mousePosition);
-            int numbTerr = test.getTerrainInfo()[numberOfCell(mousePosition)];
+            TerrainType option = TerrainType.createFromInt(test.getTerrainInfo()[numberOfCell(mousePosition)]);
             System.out.println("Pozycja Myszki: " + mouseClickPositon);
             System.out.println("Grid to:" + numberOfCell(mousePosition));
-            if (numbTerr == 0) {
-                System.out.println("Terren To Dirt");
-            } else if (numbTerr == 1) {
-                System.out.println("Terren To Rock");
-            } else if (numbTerr == 2) {
-                System.out.println("Terren To Sand");
-            } else if (numbTerr == 3) {
-                System.out.println("Terren To Grass");
+            switch (option) {
+                case DIRT:
+                    System.out.println("Terren To Dirt");
+                    break;
+                case ROCK:
+                    System.out.println("Terren To Rock");
+                    break;
+                case SAND:
+                    System.out.println("Terren To Sand");
+                    break;
+                case GRASS:
+                    System.out.println("Terren To Grass");
+                    break;
+                default:
+                    System.out.println("Nie ma takiego terenu");
             }
 
             if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
-                buildInCell(mouseClickPositon, numbTerr);
+                buildInCell(mouseClickPositon, option);
             } else if (Gdx.input.isButtonPressed(Input.Buttons.RIGHT))
                 removeBuildingFromCell(mouseClickPositon);
 
@@ -105,7 +130,7 @@ public class GameActive implements Screen {
         System.out.println("Row: " + row);
 
         try {
-            if (    col >= ACTUAL_WORKING_MAP_BEGGINIG
+            if (col >= ACTUAL_WORKING_MAP_BEGGINIG
                     && col <= ACTUAL_WORKING_MAP_ENDING
                     && row >= ACTUAL_WORKING_MAP_BEGGINIG &&
                     row <= ACTUAL_WORKING_MAP_ENDING) {
@@ -118,10 +143,9 @@ public class GameActive implements Screen {
         }
     }
 
-    private void buildInCell(Vector3 mousePosition, int numbTerr) {
+    private void buildInCell(Vector3 mousePosition, TerrainType option) {
         int row = (int) mousePosition.x / MapGrid.getCellSize();
         int col = (int) mousePosition.y / MapGrid.getCellSize();
-
         System.out.println("Column: " + col);
         System.out.println("Row: " + row);
 
@@ -132,22 +156,22 @@ public class GameActive implements Screen {
                     && col <= ACTUAL_WORKING_MAP_ENDING
                     && row >= ACTUAL_WORKING_MAP_BEGGINIG &&
                     row <= ACTUAL_WORKING_MAP_ENDING) {
-                switch (numbTerr) {
-                    case 0:
+                switch (option) {
+                    case DIRT:
                         if (stone.getValue() >= stoneMineCost) {
                             building = buildingFactory.createNewBuilding("stonemine");
                             stone.decreasedValue(stoneMineCost);
                             stoneMineCost += 20;
                         }
                         break;
-                    case 1:
+                    case ROCK:
                         if (metal.getValue() >= metalMineCost) {
                             building = buildingFactory.createNewBuilding("metalmine");
                             metal.decreasedValue(metalMineCost);
                             metalMineCost += 20;
                         }
                         break;
-                    case 3:
+                    case GRASS:
                         if (wood.getValue() >= woodCutterCost) {
                             building = buildingFactory.createNewBuilding("woodcutter");
                             wood.decreasedValue(woodCutterCost);
