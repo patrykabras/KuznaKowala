@@ -40,6 +40,12 @@ public class GameActive implements Screen {
     private int metalMineCost = 20;
     private int stoneMineCost = 20;
     private int woodCutterCost = 20;
+    private int metalMineUpgradeCost = 50;
+    private int stoneMineUpgradeCost = 50;
+    private int woodMineUpgradeCost = 50;
+    private final static int MAX_LVL = 5;
+    private final static double UPGRADE_MULTIPLER = 8.5;
+    private final static double COST_MULTIPLER = 4.5;
 
     private enum TerrainType {
         DIRT(0), ROCK(1), SAND(2), GRASS(3);
@@ -115,7 +121,7 @@ public class GameActive implements Screen {
             }
 
             if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
-                buildInCell(mouseClickPositon, option);
+                checkAndBuildOrUpgrade(mouseClickPositon, option);
             } else if (Gdx.input.isButtonPressed(Input.Buttons.RIGHT))
                 removeBuildingFromCell(mouseClickPositon);
 
@@ -143,12 +149,57 @@ public class GameActive implements Screen {
         }
     }
 
-    private void buildInCell(Vector3 mousePosition, TerrainType option) {
+    private void checkAndBuildOrUpgrade(Vector3 mousePosition, TerrainType option) {
         int row = (int) mousePosition.x / MapGrid.getCellSize();
         int col = (int) mousePosition.y / MapGrid.getCellSize();
         System.out.println("Column: " + col);
         System.out.println("Row: " + row);
 
+        if (cells[col][row].getBuilding() != null
+                && col >= ACTUAL_WORKING_MAP_BEGGINIG
+                && col <= ACTUAL_WORKING_MAP_ENDING
+                && row >= ACTUAL_WORKING_MAP_BEGGINIG &&
+                row <= ACTUAL_WORKING_MAP_ENDING) {
+            upgradeBuilding(col, row, option);
+        } else if (cells[col][row].getBuilding() == null
+                && col >= ACTUAL_WORKING_MAP_BEGGINIG
+                && col <= ACTUAL_WORKING_MAP_ENDING
+                && row >= ACTUAL_WORKING_MAP_BEGGINIG &&
+                row <= ACTUAL_WORKING_MAP_ENDING) {
+            buildBuilding(col, row, option);
+        }
+    }
+
+    private void upgradeBuilding(int col, int row, TerrainType option) {
+        switch (option) {
+            case DIRT:
+                if (stone.getValue() > stoneMineUpgradeCost && cells[col][row].getBuilding().getLvl()<= MAX_LVL) {
+                    cells[col][row].getBuilding().upgrade();
+                    stone.decreasedValue(stoneMineUpgradeCost);
+                    stoneMineUpgradeCost *= UPGRADE_MULTIPLER;
+                }
+                break;
+            case ROCK:
+                if (metal.getValue() > metalMineUpgradeCost && cells[col][row].getBuilding().getLvl()<= MAX_LVL) {
+                    cells[col][row].getBuilding().upgrade();
+                    metal.decreasedValue(metalMineUpgradeCost);
+                    metalMineUpgradeCost *= UPGRADE_MULTIPLER;
+                }
+                break;
+            case GRASS:
+                if (wood.getValue() > woodMineUpgradeCost && cells[col][row].getBuilding().getLvl()<= MAX_LVL) {
+                    cells[col][row].getBuilding().upgrade();
+                    wood.decreasedValue(woodMineUpgradeCost);
+                    woodMineUpgradeCost *= UPGRADE_MULTIPLER;
+                }
+                break;
+            default:
+                System.out.println("Nie ma takiego typu");
+        }
+        System.out.println("Poziom tego budynku to " + cells[col][row].getBuilding().getLvl());
+    }
+
+    private void buildBuilding(int col, int row, TerrainType option) {
         Building building = null;
         try {
             if (cells[col][row].getBuilding() == null
@@ -161,21 +212,21 @@ public class GameActive implements Screen {
                         if (stone.getValue() >= stoneMineCost) {
                             building = buildingFactory.createNewBuilding("stonemine");
                             stone.decreasedValue(stoneMineCost);
-                            stoneMineCost += 20;
+                            stoneMineCost *= COST_MULTIPLER;
                         }
                         break;
                     case ROCK:
                         if (metal.getValue() >= metalMineCost) {
                             building = buildingFactory.createNewBuilding("metalmine");
                             metal.decreasedValue(metalMineCost);
-                            metalMineCost += 20;
+                            metalMineCost *= COST_MULTIPLER;
                         }
                         break;
                     case GRASS:
                         if (wood.getValue() >= woodCutterCost) {
                             building = buildingFactory.createNewBuilding("woodcutter");
                             wood.decreasedValue(woodCutterCost);
-                            woodCutterCost += 20;
+                            woodCutterCost *= COST_MULTIPLER;
                         }
                         break;
                     default:
@@ -186,6 +237,7 @@ public class GameActive implements Screen {
                 building.setY(col * MapGrid.getCellSize() + 8);
                 cells[col][row].setBuilding(building);
                 cellsHolder.setCells(cells);
+                System.out.println("Poziom tego budynku to " + cells[col][row].getBuilding().getLvl());
             }
         } catch (NullPointerException e) {
             System.out.println("Nothing happend");

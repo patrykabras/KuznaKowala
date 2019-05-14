@@ -9,7 +9,11 @@ public class WoodCutter extends Building {
     private static final long serialVersionUID = 4L;
     private static final int VALUE_INCREASE = 20;
     private SpriteBatch spriteBatch = new SpriteBatch();
-    private Texture texture = new Texture("WoodCutterTemp.png");
+    private final Texture lvlTexture = new Texture("WoodCutterTemp.png");
+    private final Texture lvl2Texture = new Texture("WoodCutterTemp.png");
+    private final Texture lvl3Texture = new Texture("WoodCutterTemp.png");
+    private final Texture lvl4Texture = new Texture("WoodCutterTemp.png");
+    private final Texture lvl5Texture = new Texture("WoodCutterTemp.png");
     Wood wood = Wood.getInstance();
     private int lvl = 1;
 
@@ -21,7 +25,26 @@ public class WoodCutter extends Building {
     public void build(Camera camera) {
         spriteBatch.setProjectionMatrix(camera.getmCamera().combined);
         spriteBatch.begin();
-        spriteBatch.draw(texture, x, y);
+        switch(lvl){
+            case 1:
+                spriteBatch.draw(lvlTexture, x, y);
+                break;
+            case 2:
+                spriteBatch.draw(lvl2Texture, x, y);
+
+                break;
+            case 3:
+                spriteBatch.draw(lvl3Texture, x, y);
+
+                break;
+            case 4:
+                spriteBatch.draw(lvl4Texture, x, y);
+
+                break;
+            case 5:
+                spriteBatch.draw(lvl5Texture, x, y);
+                break;
+        }
         spriteBatch.end();
     }
 
@@ -38,5 +61,9 @@ public class WoodCutter extends Building {
     @Override
     public void working() {
         wood.increasedValue(VALUE_INCREASE*lvl);
+    }
+
+    public int getLvl() {
+        return lvl;
     }
 }

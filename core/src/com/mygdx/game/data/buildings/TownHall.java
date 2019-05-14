@@ -24,4 +24,9 @@ public class TownHall extends Building {
     public void working() {
 
     }
+
+    @Override
+    public int getLvl() {
+        return 1;
+    }
 }

@@ -30,4 +30,6 @@ public abstract class Building implements Buildable, Destroyable, Upgradable {
     public abstract void upgrade();
 
     public abstract void working();
+
+    public abstract int getLvl();
 }
