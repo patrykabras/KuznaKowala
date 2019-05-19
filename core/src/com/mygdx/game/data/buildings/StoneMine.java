@@ -9,9 +9,9 @@ public class StoneMine extends Building {
     public static final long serialVersionUID = 2L;
     private static final int VALUE_INCREASE = 20;
     private SpriteBatch spriteBatch = new SpriteBatch();
-    private final Texture lvlTexture = new Texture("StoneTemp.png");
-    private final Texture lvl2Texture = new Texture("StoneTemp.png");
-    private final Texture lvl3Texture = new Texture("StoneTemp.png");
+    private final Texture lvlTexture = new Texture("Stone1.png");
+    private final Texture lvl2Texture = new Texture("Stone2.png");
+    private final Texture lvl3Texture = new Texture("Stone3.png");
     private final Texture lvl4Texture = new Texture("StoneTemp.png");
     private final Texture lvl5Texture = new Texture("StoneTemp.png");
     Stone stone = Stone.getInstance();

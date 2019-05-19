@@ -10,9 +10,9 @@ public class MetalMine extends Building {
     private static final long serialVersionUID = 3L;
     private static final int VALUE_INCREASE = 20;
     private SpriteBatch spriteBatch = new SpriteBatch();
-    private final Texture lvlTexture = new Texture("MetalTemp.png");
-    private final Texture lvl2Texture = new Texture("MetalTemp.png");
-    private final Texture lvl3Texture = new Texture("MetalTemp.png");
+    private final Texture lvlTexture = new Texture("iron1.png");
+    private final Texture lvl2Texture = new Texture("iron2.png");
+    private final Texture lvl3Texture = new Texture("iron3.png");
     private final Texture lvl4Texture = new Texture("MetalTemp.png");
     private final Texture lvl5Texture = new Texture("MetalTemp.png");
     Metal metal = Metal.getInstance();

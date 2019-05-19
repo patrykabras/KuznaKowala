@@ -9,9 +9,9 @@ public class WoodCutter extends Building {
     private static final long serialVersionUID = 4L;
     private static final int VALUE_INCREASE = 20;
     private SpriteBatch spriteBatch = new SpriteBatch();
-    private final Texture lvlTexture = new Texture("WoodCutterTemp.png");
-    private final Texture lvl2Texture = new Texture("WoodCutterTemp.png");
-    private final Texture lvl3Texture = new Texture("WoodCutterTemp.png");
+    private final Texture lvlTexture = new Texture("wood1.png");
+    private final Texture lvl2Texture = new Texture("wood2.png");
+    private final Texture lvl3Texture = new Texture("wood3.png");
     private final Texture lvl4Texture = new Texture("WoodCutterTemp.png");
     private final Texture lvl5Texture = new Texture("WoodCutterTemp.png");
     Wood wood = Wood.getInstance();

@@ -233,8 +233,8 @@ public class GameActive implements Screen {
                         System.out.println("Ten typ nie jest zdefiniowany");
                 }
 
-                building.setX(row * MapGrid.getCellSize() + 8);
-                building.setY(col * MapGrid.getCellSize() + 8);
+                building.setX(row * MapGrid.getCellSize());
+                building.setY(col * MapGrid.getCellSize());
                 cells[col][row].setBuilding(building);
                 cellsHolder.setCells(cells);
                 System.out.println("Poziom tego budynku to " + cells[col][row].getBuilding().getLvl());
