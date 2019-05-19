@@ -43,9 +43,9 @@ public class GameActive implements Screen {
     private int metalMineUpgradeCost = 50;
     private int stoneMineUpgradeCost = 50;
     private int woodMineUpgradeCost = 50;
-    private final static int MAX_LVL = 5;
-    private final static double UPGRADE_MULTIPLER = 8.5;
-    private final static double COST_MULTIPLER = 4.5;
+    private final static int MAX_LVL = 3;
+    private final static double UPGRADE_MULTIPLER = 1.5;
+    private final static double COST_MULTIPLER = 1.5;
 
     private enum TerrainType {
         DIRT(0), ROCK(1), SAND(2), GRASS(3);
@@ -94,6 +94,7 @@ public class GameActive implements Screen {
 
 
         if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) || Gdx.input.isButtonPressed(Input.Buttons.RIGHT)) {
+
             Vector3 mousePosition = new Vector3(0, 0, 0);
             mousePosition.set(Gdx.input.getX(), Gdx.input.getY(), 0);
             float deltaX = (float) Gdx.input.getDeltaX();
@@ -120,12 +121,19 @@ public class GameActive implements Screen {
                     System.out.println("Nie ma takiego terenu");
             }
 
+            try {
+                Thread.sleep(250);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
             if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
                 checkAndBuildOrUpgrade(mouseClickPositon, option);
             } else if (Gdx.input.isButtonPressed(Input.Buttons.RIGHT))
                 removeBuildingFromCell(mouseClickPositon);
 
         }
+
     }
 
     private void removeBuildingFromCell(Vector3 mousePosition) {
@@ -173,21 +181,21 @@ public class GameActive implements Screen {
     private void upgradeBuilding(int col, int row, TerrainType option) {
         switch (option) {
             case DIRT:
-                if (stone.getValue() > stoneMineUpgradeCost && cells[col][row].getBuilding().getLvl()<= MAX_LVL) {
+                if (stone.getValue() > stoneMineUpgradeCost && cells[col][row].getBuilding().getLvl()< MAX_LVL) {
                     cells[col][row].getBuilding().upgrade();
                     stone.decreasedValue(stoneMineUpgradeCost);
                     stoneMineUpgradeCost *= UPGRADE_MULTIPLER;
                 }
                 break;
             case ROCK:
-                if (metal.getValue() > metalMineUpgradeCost && cells[col][row].getBuilding().getLvl()<= MAX_LVL) {
+                if (metal.getValue() > metalMineUpgradeCost && cells[col][row].getBuilding().getLvl()< MAX_LVL) {
                     cells[col][row].getBuilding().upgrade();
                     metal.decreasedValue(metalMineUpgradeCost);
                     metalMineUpgradeCost *= UPGRADE_MULTIPLER;
                 }
                 break;
             case GRASS:
-                if (wood.getValue() > woodMineUpgradeCost && cells[col][row].getBuilding().getLvl()<= MAX_LVL) {
+                if (wood.getValue() > woodMineUpgradeCost && cells[col][row].getBuilding().getLvl()< MAX_LVL) {
                     cells[col][row].getBuilding().upgrade();
                     wood.decreasedValue(woodMineUpgradeCost);
                     woodMineUpgradeCost *= UPGRADE_MULTIPLER;

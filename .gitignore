@@ -130,6 +130,7 @@ gradle-app.setting
 
 #Random map, no need for it to be pushed
 core/assets/*.tmx
+/core/assets/generTest.tmx
 
 # End of https://www.gitignore.io/api/java,gradle,intellij
 
