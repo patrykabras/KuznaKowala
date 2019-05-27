@@ -18,7 +18,11 @@ import com.mygdx.game.gird.MapGrid;
 import com.mygdx.game.hud.Hud;
 import com.mygdx.game.map.MapGenerator;
 import com.mygdx.game.map.MapRenderer;
+import com.mygdx.game.people.Person;
+import com.mygdx.game.people.Population;
 import com.mygdx.game.screens.PauseScreen;
+
+import java.util.Random;
 
 public class GameActive implements Screen {
 
@@ -46,6 +50,8 @@ public class GameActive implements Screen {
     private final static int MAX_LVL = 3;
     private final static double UPGRADE_MULTIPLER = 1.5;
     private final static double COST_MULTIPLER = 1.5;
+    private Population population;
+
 
     private enum TerrainType {
         DIRT(0), ROCK(1), SAND(2), GRASS(3);
@@ -72,6 +78,7 @@ public class GameActive implements Screen {
         test = new MapGenerator();
         mapRenderer = new MapRenderer();
         gridRenderer = new GridRenderer();
+        population = new Population();
     }
 
     @Override
@@ -91,7 +98,10 @@ public class GameActive implements Screen {
             mapRenderer = new MapRenderer();
             resetCellsAndValues();
         }
-
+        if (Gdx.input.isKeyPressed(35)){ // G tworzy ludzi na mapie
+            Random gener = new Random();
+            population.addNewPerson(new Person(new Vector3(gener.nextInt(1000),gener.nextInt(1000),0)));
+        }
 
         if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) || Gdx.input.isButtonPressed(Input.Buttons.RIGHT)) {
 
@@ -288,6 +298,7 @@ public class GameActive implements Screen {
                 }
             }
         }
+        population.drawPeople(mCamera);
 
         /*zmiana wartosci materialu*/
         timeState += Gdx.graphics.getDeltaTime();
@@ -308,6 +319,7 @@ public class GameActive implements Screen {
         mCamera.update();
         //draw();
     }
+
 
     @Override
     public void resize(int width, int height) {
