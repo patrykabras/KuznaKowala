@@ -201,6 +201,10 @@ public class GameActive implements Screen {
                     woodMineUpgradeCost *= UPGRADE_MULTIPLER;
                 }
                 break;
+            case SAND:
+                    if(cells[col][row].getBuilding().getLvl()< MAX_LVL)
+                    cells[col][row].getBuilding().upgrade();
+                break;
             default:
                 System.out.println("Nie ma takiego typu");
         }
@@ -222,6 +226,9 @@ public class GameActive implements Screen {
                             stone.decreasedValue(stoneMineCost);
                             stoneMineCost *= COST_MULTIPLER;
                         }
+                        break;
+                    case SAND:
+                            building = buildingFactory.createNewBuilding("humansettling");
                         break;
                     case ROCK:
                         if (metal.getValue() >= metalMineCost) {

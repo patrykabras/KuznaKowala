@@ -11,6 +11,8 @@ public class BuildingFactory {
             return new MetalMine();
         } else if (type.equalsIgnoreCase("WoodCutter")) {
             return new WoodCutter();
-        } else throw new NoSuchBuildingException("There's no such building type!");
+        } else if (type.equalsIgnoreCase("HumanSettling")) {
+            return new HumanSettling();
+        }else throw new NoSuchBuildingException("There's no such building type!");
     }
 }
