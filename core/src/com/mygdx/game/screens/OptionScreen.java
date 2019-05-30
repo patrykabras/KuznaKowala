@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.mygdx.game.app.GameActive;
 import com.mygdx.game.app.KuzniaGame;
 
 public class OptionScreen implements Screen {
@@ -33,6 +34,7 @@ public class OptionScreen implements Screen {
     ImageButton menu;
     ImageButton checkbox;
     ImageButton back;
+    GameActive gameActive;
 
     public OptionScreen(KuzniaGame game) {
         this.game = game;
@@ -41,6 +43,21 @@ public class OptionScreen implements Screen {
         createMenu();
         createCheckobox();
         createBack();
+        stage = new Stage(new ScreenViewport());
+        stage.addActor(menu);
+        stage.addActor(checkbox);
+        stage.addActor(back);
+        Gdx.input.setInputProcessor(stage);
+    }
+
+    public OptionScreen(KuzniaGame game, GameActive gameActive) {
+        this.game = game;
+        this.gameActive = gameActive;
+        loadTextures();
+        createDrawable();
+        createMenu();
+        createCheckobox();
+        createBackPause();
         stage = new Stage(new ScreenViewport());
         stage.addActor(menu);
         stage.addActor(checkbox);
@@ -120,6 +137,28 @@ public class OptionScreen implements Screen {
             public void clicked(InputEvent event, float x, float y) {
                 game.setScreen(new MenuScreen(game));
                 dispose();
+            }
+        });
+    }
+
+    private void createBackPause() {
+        back = new ImageButton(drawableBack, drawableBackActive);
+        back.setPosition(Gdx.app.getGraphics().getWidth() / 2 - backInactive.getWidth() / 2, menu.getY() + 10);
+        back.setSize(backInactive.getWidth(), backInactive.getHeight());
+        back.addListener(new ClickListener() {
+            @Override
+            public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+                playSound();
+                back.getStyle().imageUp = drawableBackActive;
+            }
+
+            public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+                back.getStyle().imageUp = drawableBack;
+            }
+
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.setScreen(new PauseScreen(game, gameActive));
             }
         });
     }
