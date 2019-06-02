@@ -159,8 +159,7 @@ public class PauseScreen implements Screen {
 
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new OptionScreen(game));
-                dispose();
+                game.setScreen(new OptionScreen(game, gameActive));
             }
         });
     }

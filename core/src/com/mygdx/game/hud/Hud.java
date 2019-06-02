@@ -6,7 +6,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -22,34 +24,47 @@ public class Hud {
     Label woodLabel;
     Label stoneLabel;
     Label oreLabel;
+    Label humanLabel;
     private Viewport viewport;
     private Wood wood = Wood.getInstance();
     private Stone stone = Stone.getInstance();
     private Metal metal = Metal.getInstance();
-    private Texture resources;
-
+    //private Human human;
+    private Image woodTexture;
+    private Image stoneTexture;
+    private Image metalTexture;
+    private Image humanTexture;
 
     public Hud(SpriteBatch sb, KuzniaGame game) {
         this.game = game;
-        resources = new Texture("resources.png");
+
 
         viewport = new FitViewport(720, 420, new OrthographicCamera());
         stage = new Stage(viewport, sb);
+
 
         Table table = new Table();
         table.top();
         table.setFillParent(true);
 
-        woodLabel = new Label(String.format(String.format("%03d", wood.getValue())), new Label.LabelStyle(new BitmapFont(), Color.BLACK));
-        stoneLabel = new Label(String.format(String.format("%03d", stone.getValue())), new Label.LabelStyle(new BitmapFont(), Color.BLACK));
-        oreLabel = new Label(String.format(String.format("%03d", metal.getValue())), new Label.LabelStyle(new BitmapFont(), Color.BLACK));
+        woodTexture = new Image(new Texture("wood.png"));
+        stoneTexture = new Image(new Texture("stone.png"));
+        metalTexture = new Image(new Texture("iron3.png"));
+        humanTexture = new Image(new Texture("human.png"));
+        woodLabel = new Label(String.format(String.format("%03d", wood.getValue())), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        stoneLabel = new Label(String.format(String.format("%03d", stone.getValue())), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        oreLabel = new Label(String.format(String.format("%03d", metal.getValue())), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        humanLabel = new Label(String.format(String.format("%03d", 0)), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
-        table.add(woodLabel).expandX().padLeft(-550);
-        table.row();
-        table.add(stoneLabel).expandX().padLeft(-550);
-        table.row();
-        table.add(oreLabel).expandX().padLeft(-550);
-        table.row();
+        table.add(woodTexture);
+        table.add(woodLabel);
+        table.add(stoneTexture);
+        table.add(stoneLabel);
+        table.add(metalTexture);
+        table.add(oreLabel);
+        table.add(humanTexture);
+        table.add(humanLabel);
+        table.padLeft(-490);
 
         stage.addActor(table);
 
@@ -59,9 +74,6 @@ public class Hud {
         woodLabel.setText(wood.getValue());
         stoneLabel.setText(stone.getValue());
         oreLabel.setText(metal.getValue());
-        game.batch.begin();
-        game.batch.draw(resources, 0, 361);
-        game.batch.end();
         game.batch.setProjectionMatrix(this.stage.getCamera().combined);
         this.stage.draw();
     }
