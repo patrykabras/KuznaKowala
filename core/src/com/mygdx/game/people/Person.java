@@ -1,14 +1,34 @@
 package com.mygdx.game.people;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector3;
+import com.mygdx.game.camera.Camera;
+
 public class Person {
-    private boolean isAlive;
-    private boolean assigned;
+    private Vector3 position;
+    private SpriteBatch sprite= new SpriteBatch();
+    private final Texture personTexture = new Texture("person.png");
 
-    public void setAlive(boolean alive) { //czy człowiek jest stworzony/żyje
-        isAlive = alive;
+    public Person(Vector3 position, SpriteBatch sprite) {
+        this.position = position;
+        this.sprite = sprite;
+    }
+    public Person(Vector3 position) {
+        this.position = position;
     }
 
-    public void setAssigned(boolean assigned) { //przypisany
-        this.assigned = assigned;
+    public void drawPerson(Camera camera){
+        sprite.setProjectionMatrix(camera.getmCamera().combined);
+        sprite.begin();
+        sprite.draw(personTexture, position.x, position.y);
+        sprite.end();
     }
+
+
+    public void destroy() {
+        sprite.dispose();
+    }
+
 }
