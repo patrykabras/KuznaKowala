@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.mygdx.game.camera.Camera;
 import com.mygdx.game.data.buildings.Building;
 import com.mygdx.game.data.buildings.BuildingFactory;
@@ -53,6 +54,8 @@ public class GameActive implements Screen {
     private final static double COST_MULTIPLER = 1.5;
     private Population population;
     private PopUpMenu popUpMenu;
+    private ImageButton upgrade;
+    private ImageButton destroy;
 
 
     private enum TerrainType {
@@ -82,6 +85,8 @@ public class GameActive implements Screen {
         population = new Population();
         hud = new Hud(game.batch, game, population);
         popUpMenu = new PopUpMenu(game);
+        upgrade = popUpMenu.getUpgrade();
+        destroy = popUpMenu.getDestroy();
     }
 
     @Override
@@ -106,7 +111,7 @@ public class GameActive implements Screen {
             population.addNewPerson(new Person(new Vector3(gener.nextInt(1000),gener.nextInt(1000),0)));
         }
 
-        if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) || Gdx.input.isButtonPressed(Input.Buttons.RIGHT)) {
+        if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
 
             Vector3 mousePosition = new Vector3(0, 0, 0);
             mousePosition.set(Gdx.input.getX(), Gdx.input.getY(), 0);
@@ -146,6 +151,24 @@ public class GameActive implements Screen {
                 removeBuildingFromCell(mouseClickPositon);
 
         }
+        if (Gdx.input.isButtonPressed(Input.Buttons.RIGHT)) {
+            if (popUpMenu.isOn == false) {
+                popUpMenu.isOn = true;
+                try {
+                    Thread.sleep(250);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            else {
+                popUpMenu.isOn = false;
+                try {
+                    Thread.sleep(250);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
 
     }
 
@@ -181,8 +204,7 @@ public class GameActive implements Screen {
                 && col <= ACTUAL_WORKING_MAP_ENDING
                 && row >= ACTUAL_WORKING_MAP_BEGGINIG &&
                 row <= ACTUAL_WORKING_MAP_ENDING) {
-            popUpMenu.isOn = true;
-            //upgradeBuilding(col, row, option);
+            upgradeBuilding(col, row, option);
         } else if (cells[col][row].getBuilding() == null
                 && col >= ACTUAL_WORKING_MAP_BEGGINIG
                 && col <= ACTUAL_WORKING_MAP_ENDING

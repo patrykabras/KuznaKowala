@@ -33,6 +33,14 @@ public class PopUpMenu {
     private ImageButton destroy;
     public static boolean isOn;
 
+    public ImageButton getUpgrade() {
+        return upgrade;
+    }
+
+    public ImageButton getDestroy() {
+        return destroy;
+    }
+
     public PopUpMenu(KuzniaGame game) {
 
         table = new Table();
