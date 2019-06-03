@@ -93,7 +93,7 @@ public class GameActive<music> implements Screen {
         building = Gdx.audio.newMusic(Gdx.files.internal("building.ogg"));
         building.setVolume(0.2f);
         destroy = Gdx.audio.newMusic(Gdx.files.internal("destroy.ogg"));
-        destroy.setVolume(0.2f);
+        destroy.setVolume(0.1f);
     }
 
     @Override

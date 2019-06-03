@@ -209,7 +209,7 @@ public class PauseScreen implements Screen {
     @Override
     public void render(float delta) {
         game.batch.begin();
-        game.batch.draw(background, 0 ,0);
+        game.batch.draw(background, 0 ,0, 720,480);
         game.batch.end();
         stage.act();
         stage.draw();
