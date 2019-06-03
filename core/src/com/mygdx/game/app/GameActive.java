@@ -58,6 +58,7 @@ public class GameActive<music> implements Screen {
     public static boolean canBuild;
     public static boolean canDestroy;
     private Music building;
+    private Music destroy;
 
 
     private enum TerrainType {
@@ -91,6 +92,8 @@ public class GameActive<music> implements Screen {
         popUpMenu = new PopUpMenu(game);
         building = Gdx.audio.newMusic(Gdx.files.internal("building.ogg"));
         building.setVolume(0.2f);
+        destroy = Gdx.audio.newMusic(Gdx.files.internal("destroy.ogg"));
+        destroy.setVolume(0.2f);
     }
 
     @Override
@@ -155,8 +158,10 @@ public class GameActive<music> implements Screen {
             if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) && canBuild == true) {
                     checkAndBuildOrUpgrade(mouseClickPositon, option);
 
-            } else if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) && canDestroy == true)
+            } else if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) && canDestroy == true) {
                 removeBuildingFromCell(mouseClickPositon);
+                destroy.play();
+            }
 
         }
         if (Gdx.input.isButtonPressed(Input.Buttons.RIGHT)) {
