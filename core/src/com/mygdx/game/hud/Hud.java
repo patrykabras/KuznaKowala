@@ -59,14 +59,14 @@ public class Hud {
         humanLabel = new Label(String.format(String.format("%03d", population.getPopulation().size())), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
         table.add(woodTexture);
-        table.add(woodLabel);
+        table.add(woodLabel).width(20).pad(10);
         table.add(stoneTexture);
-        table.add(stoneLabel);
+        table.add(stoneLabel).width(20).pad(10);
         table.add(metalTexture);
-        table.add(oreLabel);
+        table.add(oreLabel).width(20).pad(10);
         table.add(humanTexture);
-        table.add(humanLabel);
-        table.padLeft(-490);
+        table.add(humanLabel).width(20).pad(10);
+        table.padLeft(-400);
 
         stage.addActor(table);
 
