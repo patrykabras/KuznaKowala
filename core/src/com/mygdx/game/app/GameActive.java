@@ -54,6 +54,7 @@ public class GameActive<music> implements Screen {
     private final static double UPGRADE_MULTIPLER = 1.5;
     private final static double COST_MULTIPLER = 1.5;
     private Population population;
+    private Population populationOfWorkers;
     private PopUpMenu popUpMenu;
     public static boolean canBuild;
     public static boolean canDestroy;
@@ -88,6 +89,7 @@ public class GameActive<music> implements Screen {
         mapRenderer = new MapRenderer();
         gridRenderer = new GridRenderer();
         population = new Population();
+        populationOfWorkers = new Population();
         hud = new Hud(game.batch, game, population,this);
         popUpMenu = new PopUpMenu(game);
         building = Gdx.audio.newMusic(Gdx.files.internal("building.ogg"));
@@ -284,10 +286,17 @@ public class GameActive<music> implements Screen {
                     row <= ACTUAL_WORKING_MAP_ENDING) {
                 switch (option) {
                     case DIRT:
-                        if (stone.getValue() >= stoneMineCost) {
+                        if (stone.getValue() >= stoneMineCost && population.getPopulation().size() > 0 ) {
                             building = buildingFactory.createNewBuilding("stonemine");
                             stone.decreasedValue(stoneMineCost);
                             stoneMineCost *= COST_MULTIPLER;
+                            int tempSize = population.getPopulation().size();
+                            Person temp = population.getPopulation().get(tempSize-1);
+                            population.getPopulation().remove(tempSize-1);
+                            temp.givePurpose("stonemine");
+                            Random gener = new Random();
+                            temp.setWorkPositon(new Vector3(row * MapGrid.getCellSize() + gener.nextInt(20),col * MapGrid.getCellSize()+ gener.nextInt(20),0));
+                            populationOfWorkers.getPopulation().add(temp);
                         }
                         break;
                     case SAND:
@@ -363,6 +372,7 @@ public class GameActive<music> implements Screen {
             }
         }
         population.drawPeople(mCamera);
+        if(populationOfWorkers.getPopulation().size() > 0)populationOfWorkers.drawPeople(mCamera);
 
         /*zmiana wartosci materialu*/
         timeState += Gdx.graphics.getDeltaTime();
