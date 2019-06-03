@@ -69,11 +69,13 @@ public class PopUpMenu {
     private void createMenu() {
         background = new ImageButton(drawableBackground);
         background.setPosition(Gdx.app.getGraphics().getWidth() / 2 - backgroundTexture.getWidth() / 2, 0);
+        background.setSize((backgroundTexture.getWidth()) , backgroundTexture.getHeight());
     }
 
     private void createUpgrade(){
         upgrade = new ImageButton(drawableUpgrade);
         upgrade.setPosition(background.getX() + 24 - upgradeTexture.getWidth()/2 , background.getY() + 5);
+        upgrade.setSize((upgradeTexture.getWidth()) , upgradeTexture.getHeight());
         upgrade.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -86,6 +88,7 @@ public class PopUpMenu {
     private void createDestroy(){
         destroy = new ImageButton(drawableDestroy);
         destroy.setPosition((upgrade.getX() + 40) , upgrade.getY());
+        destroy.setSize((destroyTexture.getWidth()) , destroyTexture.getHeight());
         destroy.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -97,7 +100,7 @@ public class PopUpMenu {
 
     public void showMenu(){
         if(isOn == true) {
-
+            game.batch.setProjectionMatrix(this.stage.getCamera().combined);
             this.stage.act();
             this.stage.draw();
         }

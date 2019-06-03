@@ -387,6 +387,7 @@ public class GameActive<music> implements Screen {
     public void resize(int width, int height) {
         int aspect = width / height;
         mCamera = new Camera(width * aspect, height * aspect);
+        popUpMenu = new PopUpMenu(game);
     }
 
     @Override
