@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.camera.Camera;
 import com.mygdx.game.data.materials.Metal;
+import com.mygdx.game.people.Person;
 //import sun.awt.SunToolkit;
 
 public class MetalMine extends Building {

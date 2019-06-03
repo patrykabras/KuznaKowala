@@ -50,6 +50,8 @@ public class GameActive<music> implements Screen {
     private int metalMineUpgradeCost = 50;
     private int stoneMineUpgradeCost = 50;
     private int woodMineUpgradeCost = 50;
+    private int humanSettlementUpgradeCost = 20;
+    private int humanSettlementBuildCost = 20;
     private final static int MAX_LVL = 3;
     private final static double UPGRADE_MULTIPLER = 1.5;
     private final static double COST_MULTIPLER = 1.5;
@@ -90,7 +92,7 @@ public class GameActive<music> implements Screen {
         gridRenderer = new GridRenderer();
         population = new Population();
         populationOfWorkers = new Population();
-        hud = new Hud(game.batch, game, population,this);
+        hud = new Hud(game.batch, game, population, this);
         popUpMenu = new PopUpMenu(game);
         building = Gdx.audio.newMusic(Gdx.files.internal("building.ogg"));
         building.setVolume(0.2f);
@@ -154,20 +156,20 @@ public class GameActive<music> implements Screen {
             }
 
             if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) && canBuild == true) {
-                    checkAndBuildOrUpgrade(mouseClickPositon, option);
+                checkAndBuildOrUpgrade(mouseClickPositon, option);
 
             } else if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) && canDestroy == true) {
                 removeBuildingFromCell(mouseClickPositon);
-                if(KuzniaGame.soundOn == true)
-                destroy.play();
+                if (KuzniaGame.soundOn == true)
+                    destroy.play();
             }
 
         }
         if (Gdx.input.isButtonPressed(Input.Buttons.RIGHT)) {
-            if(popUpMenu.isOn == false && canBuild == true){
+            if (popUpMenu.isOn == false && canBuild == true) {
                 canBuild = false;
             }
-            if(popUpMenu.isOn == false && canDestroy == true){
+            if (popUpMenu.isOn == false && canDestroy == true) {
                 canDestroy = false;
             }
             if (popUpMenu.isOn == false) {
@@ -177,8 +179,7 @@ public class GameActive<music> implements Screen {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-            }
-            else {
+            } else {
                 popUpMenu.isOn = false;
 
                 try {
@@ -225,16 +226,16 @@ public class GameActive<music> implements Screen {
                 && row >= ACTUAL_WORKING_MAP_BEGGINIG &&
                 row <= ACTUAL_WORKING_MAP_ENDING) {
             upgradeBuilding(col, row, option);
-            if(KuzniaGame.soundOn == true)
-            building.play();
+            if (KuzniaGame.soundOn == true)
+                building.play();
         } else if (cells[col][row].getBuilding() == null
                 && col >= ACTUAL_WORKING_MAP_BEGGINIG
                 && col <= ACTUAL_WORKING_MAP_ENDING
                 && row >= ACTUAL_WORKING_MAP_BEGGINIG &&
                 row <= ACTUAL_WORKING_MAP_ENDING) {
             buildBuilding(col, row, option);
-            if(KuzniaGame.soundOn == true)
-            building.play();
+            if (KuzniaGame.soundOn == true)
+                building.play();
         }
     }
 
@@ -270,6 +271,7 @@ public class GameActive<music> implements Screen {
                 break;
             case GRASS:
                 if (wood.getValue() > woodMineUpgradeCost && cells[col][row].getBuilding().getLvl()< MAX_LVL && population.getPopulation().size() > 0) {
+
                     cells[col][row].getBuilding().upgrade();
                     wood.decreasedValue(woodMineUpgradeCost);
                     woodMineUpgradeCost *= UPGRADE_MULTIPLER;
@@ -283,15 +285,20 @@ public class GameActive<music> implements Screen {
                 }
                 break;
             case SAND:
-                    if(cells[col][row].getBuilding().getLvl()< MAX_LVL){
-                        cells[col][row].getBuilding().upgrade();
-                        Random gener = new Random();
-                        for (int i = 0; i < 5; i++) {
-                            Person temp = new Person(new Vector3(row * MapGrid.getCellSize() + gener.nextInt(20),col * MapGrid.getCellSize()+ gener.nextInt(20),0));
+                if (cells[col][row].getBuilding().getLvl() < MAX_LVL && metal.getValue() > humanSettlementUpgradeCost
+                        && wood.getValue() > humanSettlementUpgradeCost && stone.getValue() > humanSettlementUpgradeCost) {
+                    cells[col][row].getBuilding().upgrade();
+                    metal.decreasedValue(humanSettlementUpgradeCost);
+                    wood.decreasedValue(humanSettlementUpgradeCost);
+                    stone.decreasedValue(humanSettlementUpgradeCost);
+                    humanSettlementUpgradeCost += 50;
+                    Random gener = new Random();
+                    for (int i = 0; i < 5; i++) {
+                    Person temp = new Person(new Vector3(row * MapGrid.getCellSize() + gener.nextInt(20),col * MapGrid.getCellSize()+ gener.nextInt(20),0));
                             temp.setHomePositon(new Vector3(row * MapGrid.getCellSize(),col * MapGrid.getCellSize(),0));
                             population.addNewPerson(temp);
-                        }
                     }
+                }
                 break;
             default:
                 System.out.println("Nie ma takiego typu");
@@ -309,27 +316,36 @@ public class GameActive<music> implements Screen {
                     row <= ACTUAL_WORKING_MAP_ENDING) {
                 switch (option) {
                     case DIRT:
-                        if (stone.getValue() >= stoneMineCost && population.getPopulation().size() > 0 ) {
+                        if (stone.getValue() >= stoneMineCost && population.getPopulation().size() > 0) {
                             building = buildingFactory.createNewBuilding("stonemine");
                             stone.decreasedValue(stoneMineCost);
                             stoneMineCost *= COST_MULTIPLER;
                             int tempSize = population.getPopulation().size();
-                            Person temp = population.getPopulation().get(tempSize-1);
-                            population.getPopulation().remove(tempSize-1);
+                            Person temp = population.getPopulation().get(tempSize - 1);
+                            population.getPopulation().remove(tempSize - 1);
                             temp.givePurpose("stonemine");
                             Random gener = new Random();
-                            temp.setWorkPositon(new Vector3(row * MapGrid.getCellSize() + gener.nextInt(20),col * MapGrid.getCellSize()+ gener.nextInt(20),0));
+                            temp.setWorkPositon(new Vector3(row * MapGrid.getCellSize() + gener.nextInt(20), col * MapGrid.getCellSize() + gener.nextInt(20), 0));
                             populationOfWorkers.getPopulation().add(temp);
                         }
                         break;
                     case SAND:
+                        if (metal.getValue() > humanSettlementBuildCost
+                                && wood.getValue() > humanSettlementBuildCost && stone.getValue() > humanSettlementBuildCost) {
                             building = buildingFactory.createNewBuilding("humansettling");
+                            metal.decreasedValue(humanSettlementBuildCost);
+                            wood.decreasedValue(humanSettlementBuildCost);
+                            stone.decreasedValue(humanSettlementBuildCost);
+
+                            humanSettlementBuildCost += 50;
+
                             Random gener = new Random();
                             for (int i = 0; i < 5; i++) {
                                 Person temp = new Person(new Vector3(row * MapGrid.getCellSize() + gener.nextInt(20),col * MapGrid.getCellSize()+ gener.nextInt(20),0));
                                 temp.setHomePositon(new Vector3(row * MapGrid.getCellSize(),col * MapGrid.getCellSize(),0));
-                                population.addNewPerson(temp);
+                                population.addNewP
                             }
+                        }
                         break;
                     case ROCK:
                         if (metal.getValue() >= metalMineCost && population.getPopulation().size() > 0) {
@@ -411,7 +427,7 @@ public class GameActive<music> implements Screen {
             }
         }
         population.drawPeople(mCamera);
-        if(populationOfWorkers.getPopulation().size() > 0)populationOfWorkers.drawPeople(mCamera);
+        if (populationOfWorkers.getPopulation().size() > 0) populationOfWorkers.drawPeople(mCamera);
 
         /*zmiana wartosci materialu*/
         timeState += Gdx.graphics.getDeltaTime();
@@ -463,6 +479,7 @@ public class GameActive<music> implements Screen {
     public void dispose() {
 
     }
+
     public int getMetalMineCost() {
         return metalMineCost;
     }

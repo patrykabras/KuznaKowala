@@ -2,9 +2,16 @@ package com.mygdx.game.data.gridData;
 
 import com.mygdx.game.gird.Cell;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Arrays;
 
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
+
 public class CellsHolder {
+
     private static CellsHolder instance = new CellsHolder();
     private Cell[][] cells = new Cell[50][50];
 
