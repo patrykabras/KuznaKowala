@@ -88,7 +88,7 @@ public class GameActive<music> implements Screen {
         mapRenderer = new MapRenderer();
         gridRenderer = new GridRenderer();
         population = new Population();
-        hud = new Hud(game.batch, game, population);
+        hud = new Hud(game.batch, game, population,this);
         popUpMenu = new PopUpMenu(game);
         building = Gdx.audio.newMusic(Gdx.files.internal("building.ogg"));
         building.setVolume(0.2f);
@@ -115,10 +115,6 @@ public class GameActive<music> implements Screen {
             test = new MapGenerator();
             mapRenderer = new MapRenderer();
             resetCellsAndValues();
-        }
-        if (Gdx.input.isKeyPressed(35)){ // G tworzy ludzi na mapie
-            Random gener = new Random();
-            population.addNewPerson(new Person(new Vector3(gener.nextInt(1000),gener.nextInt(1000),0)));
         }
 
         if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
@@ -264,8 +260,13 @@ public class GameActive<music> implements Screen {
                 }
                 break;
             case SAND:
-                    if(cells[col][row].getBuilding().getLvl()< MAX_LVL)
-                    cells[col][row].getBuilding().upgrade();
+                    if(cells[col][row].getBuilding().getLvl()< MAX_LVL){
+                        cells[col][row].getBuilding().upgrade();
+                        Random gener = new Random();
+                        for (int i = 0; i < 5; i++) {
+                            population.addNewPerson(new Person(new Vector3(row * MapGrid.getCellSize() + gener.nextInt(20),col * MapGrid.getCellSize()+ gener.nextInt(20),0)));
+                        }
+                    }
                 break;
             default:
                 System.out.println("Nie ma takiego typu");
@@ -291,6 +292,10 @@ public class GameActive<music> implements Screen {
                         break;
                     case SAND:
                             building = buildingFactory.createNewBuilding("humansettling");
+                            Random gener = new Random();
+                            for (int i = 0; i < 5; i++) {
+                                population.addNewPerson(new Person(new Vector3(row * MapGrid.getCellSize() + gener.nextInt(20),col * MapGrid.getCellSize()+ gener.nextInt(20),0)));
+                            }
                         break;
                     case ROCK:
                         if (metal.getValue() >= metalMineCost) {
@@ -408,5 +413,16 @@ public class GameActive<music> implements Screen {
     @Override
     public void dispose() {
 
+    }
+    public int getMetalMineCost() {
+        return metalMineCost;
+    }
+
+    public int getStoneMineCost() {
+        return stoneMineCost;
+    }
+
+    public int getWoodCutterCost() {
+        return woodCutterCost;
     }
 }

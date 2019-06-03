@@ -9,7 +9,7 @@ public class HumanSettling extends Building {
     private SpriteBatch spriteBatch = new SpriteBatch();
     private final Texture lvlTexture = new Texture("humanSpawner1.png");
     private final Texture lvl2Texture = new Texture("humanSpawner2.png");
-    private final Texture lvl3Texture = new Texture("grey_box.png");
+    private final Texture lvl3Texture = new Texture("humanSpawner3.png");
     private int lvl = 1;
 
     @Override
