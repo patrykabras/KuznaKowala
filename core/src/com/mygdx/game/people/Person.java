@@ -26,19 +26,49 @@ public class Person {
     }
     public Person(Vector3 position) {
         this.position = position;
+        this.workName = "Normal";
     }
 
     public void drawPerson(Camera camera){
         sprite.setProjectionMatrix(camera.getmCamera().combined);
         sprite.begin();
-        sprite.draw(personTexture, position.x, position.y);
-//        if(workName.equals("Miner"))sprite.draw(personMiner, position.x, position.y);
+        if(workPositon != null) {
+            float workX = this.workPositon.x;
+            float workY = this.workPositon.y;
+            float positionX = this.position.x;
+            float positionY = this.position.y;
+            if(positionX <= workX){
+                position.x++;
+            }else{
+                position.x--;
+            }
+            if(positionY <= workY){
+                position.y++;
+            }else {
+                position.y--;
+            }
+//            if(positionX == workX){
+//
+//            }
+//            if(positionY == workY){
+//
+//            }
+        }
+        if(this.workName == "Normal")sprite.draw(personTexture, position.x, position.y);
+        else if(this.workName == "stonemine")sprite.draw(personMiner, position.x, position.y);
         sprite.end();
     }
 
 
     public void destroy() {
         sprite.dispose();
+    }
+
+    public void givePurpose(String name){
+        this.workName = name;
+    }
+    public void setWorkPositon(Vector3 position){
+        this.workPositon = position;
     }
 
 }
