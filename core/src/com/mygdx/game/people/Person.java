@@ -43,35 +43,36 @@ public class Person {
             float positionX = this.position.x;
             float positionY = this.position.y;
             if(isHome){
-            if(positionX <= workX){
+            if(positionX < workX){
                 position.x++;
-            }else{
+            }else if(positionX > workX){
                 position.x--;
             }
-            if(positionY <= workY){
+            if(positionY < workY){
                 position.y++;
-            }else {
+            }else if(positionY > workY){
                 position.y--;
             }
             }
             if(isWork){
-                if(positionX <= homeX){
+                if(positionX < homeX){
                     position.x++;
-                }else{
+                }else if(positionX > homeX){
                     position.x--;
                 }
-                if(positionY <= homeY){
+                if(positionY < homeY){
                     position.y++;
-                }else {
+                }else if(positionY > homeY){
                     position.y--;
                 }
             }
-            if(positionX == workX && positionY == workY ){
+
+            if(positionX == workX && positionY == workY && isHome == true){
                 this.isWork = true;
                 this.isHome = false;
 
             }
-            if(positionX == homeX && positionY == homeY){
+            if(positionX == homeX && positionY == homeY && isWork == true){
                 this.isHome = true;
                 this.isWork = false;
 

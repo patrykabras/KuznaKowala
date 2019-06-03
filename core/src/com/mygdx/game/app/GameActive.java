@@ -491,4 +491,7 @@ public class GameActive<music> implements Screen {
     public int getWoodCutterCost() {
         return woodCutterCost;
     }
+    public int getHumanSettlementBuildCost() {
+        return humanSettlementBuildCost;
+    }
 }

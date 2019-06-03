@@ -78,6 +78,7 @@ public class Hud {
         oreLabel = new Label(String.format(String.format("%03d", metal.getValue())), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         oreCost = new Label(String.format("%03d", gameActive.getMetalMineCost()), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         humanLabel = new Label(String.format(String.format("%03d", population.getPopulation().size())), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        humanCost = new Label(String.format(String.format("%03d", population.getPopulation().size())), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
 
         hudTable.add(woodTexture);
@@ -91,6 +92,10 @@ public class Hud {
         hudTable.padRight(-450);
 
         upgradeTable.add(new Label("next", new Label.LabelStyle(new BitmapFont(), Color.WHITE)));
+        upgradeTable.add(humanFactory).pad(5);
+        upgradeTable.add(humanCost);
+        upgradeTable.row();
+        upgradeTable.add(new Label("next", new Label.LabelStyle(new BitmapFont(), Color.WHITE)));
         upgradeTable.add(woodFactory).pad(5);
         upgradeTable.add(woodCost);
         upgradeTable.row();
@@ -101,9 +106,8 @@ public class Hud {
         upgradeTable.add(new Label("next", new Label.LabelStyle(new BitmapFont(), Color.WHITE)));
         upgradeTable.add(metalFactory).pad(5);
         upgradeTable.add(oreCost);
-        upgradeTable.row();
-        upgradeTable.add(new Label("next", new Label.LabelStyle(new BitmapFont(), Color.WHITE)));
-        upgradeTable.add(humanFactory).pad(5);
+
+
 
         stage.addActor(hudTable);
         stage.addActor(upgradeTable);
@@ -123,6 +127,7 @@ public class Hud {
         woodCost.setText(gameActive.getWoodCutterCost());
         stoneCost.setText(gameActive.getStoneMineCost());
         oreCost.setText(gameActive.getMetalMineCost());
+        humanCost.setText(gameActive.getHumanSettlementBuildCost());
         game.batch.setProjectionMatrix(this.stage.getCamera().combined);
         this.stage.draw();
     }
