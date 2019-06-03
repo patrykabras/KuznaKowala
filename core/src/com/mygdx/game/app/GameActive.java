@@ -343,7 +343,7 @@ public class GameActive<music> implements Screen {
                             for (int i = 0; i < 5; i++) {
                                 Person temp = new Person(new Vector3(row * MapGrid.getCellSize() + gener.nextInt(20),col * MapGrid.getCellSize()+ gener.nextInt(20),0));
                                 temp.setHomePositon(new Vector3(row * MapGrid.getCellSize(),col * MapGrid.getCellSize(),0));
-                                population.addNewP
+                                population.addNewPerson(temp);
                             }
                         }
                         break;
