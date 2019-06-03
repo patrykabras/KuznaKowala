@@ -3,8 +3,10 @@ package com.mygdx.game.app;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.mygdx.game.camera.Camera;
 import com.mygdx.game.data.buildings.Building;
 import com.mygdx.game.data.buildings.BuildingFactory;
@@ -16,6 +18,7 @@ import com.mygdx.game.gird.Cell;
 import com.mygdx.game.gird.GridRenderer;
 import com.mygdx.game.gird.MapGrid;
 import com.mygdx.game.hud.Hud;
+import com.mygdx.game.hud.PopUpMenu;
 import com.mygdx.game.map.MapGenerator;
 import com.mygdx.game.map.MapRenderer;
 import com.mygdx.game.people.Person;
@@ -24,7 +27,7 @@ import com.mygdx.game.screens.PauseScreen;
 
 import java.util.Random;
 
-public class GameActive implements Screen {
+public class GameActive<music> implements Screen {
 
     private final KuzniaGame game;
     private final int ACTUAL_WORKING_MAP_BEGGINIG = 2;
@@ -51,6 +54,11 @@ public class GameActive implements Screen {
     private final static double UPGRADE_MULTIPLER = 1.5;
     private final static double COST_MULTIPLER = 1.5;
     private Population population;
+    private PopUpMenu popUpMenu;
+    public static boolean canBuild;
+    public static boolean canDestroy;
+    private Music building;
+    private Music destroy;
 
 
     private enum TerrainType {
@@ -73,12 +81,19 @@ public class GameActive implements Screen {
 
     public GameActive(KuzniaGame game) {
         this.game = game;
-        hud = new Hud(game.batch, game);
+        canBuild = false;
+        canDestroy = false;
         mCamera = new Camera();
         test = new MapGenerator();
         mapRenderer = new MapRenderer();
         gridRenderer = new GridRenderer();
         population = new Population();
+        hud = new Hud(game.batch, game, population);
+        popUpMenu = new PopUpMenu(game);
+        building = Gdx.audio.newMusic(Gdx.files.internal("building.ogg"));
+        building.setVolume(0.2f);
+        destroy = Gdx.audio.newMusic(Gdx.files.internal("destroy.ogg"));
+        destroy.setVolume(0.1f);
     }
 
     @Override
@@ -89,6 +104,9 @@ public class GameActive implements Screen {
     public void userInput() {
         //escape button to menu
         if (Gdx.input.isKeyPressed(131)) {
+            canDestroy = false;
+            canBuild = false;
+            PopUpMenu.isOn = false;
             game.setScreen(new PauseScreen(game, this));
             this.pause();
         }
@@ -103,7 +121,7 @@ public class GameActive implements Screen {
             population.addNewPerson(new Person(new Vector3(gener.nextInt(1000),gener.nextInt(1000),0)));
         }
 
-        if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) || Gdx.input.isButtonPressed(Input.Buttons.RIGHT)) {
+        if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
 
             Vector3 mousePosition = new Vector3(0, 0, 0);
             mousePosition.set(Gdx.input.getX(), Gdx.input.getY(), 0);
@@ -137,10 +155,39 @@ public class GameActive implements Screen {
                 e.printStackTrace();
             }
 
-            if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
-                checkAndBuildOrUpgrade(mouseClickPositon, option);
-            } else if (Gdx.input.isButtonPressed(Input.Buttons.RIGHT))
+            if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) && canBuild == true) {
+                    checkAndBuildOrUpgrade(mouseClickPositon, option);
+
+            } else if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) && canDestroy == true) {
                 removeBuildingFromCell(mouseClickPositon);
+                destroy.play();
+            }
+
+        }
+        if (Gdx.input.isButtonPressed(Input.Buttons.RIGHT)) {
+            if(popUpMenu.isOn == false && canBuild == true){
+                canBuild = false;
+            }
+            if(popUpMenu.isOn == false && canDestroy == true){
+                canDestroy = false;
+            }
+            if (popUpMenu.isOn == false) {
+                popUpMenu.isOn = true;
+                try {
+                    Thread.sleep(250);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            else {
+                popUpMenu.isOn = false;
+
+                try {
+                    Thread.sleep(250);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
 
         }
 
@@ -167,7 +214,7 @@ public class GameActive implements Screen {
         }
     }
 
-    private void checkAndBuildOrUpgrade(Vector3 mousePosition, TerrainType option) {
+    public void checkAndBuildOrUpgrade(Vector3 mousePosition, TerrainType option) {
         int row = (int) mousePosition.x / MapGrid.getCellSize();
         int col = (int) mousePosition.y / MapGrid.getCellSize();
         System.out.println("Column: " + col);
@@ -179,12 +226,16 @@ public class GameActive implements Screen {
                 && row >= ACTUAL_WORKING_MAP_BEGGINIG &&
                 row <= ACTUAL_WORKING_MAP_ENDING) {
             upgradeBuilding(col, row, option);
+            if(KuzniaGame.soundOn == true)
+            building.play();
         } else if (cells[col][row].getBuilding() == null
                 && col >= ACTUAL_WORKING_MAP_BEGGINIG
                 && col <= ACTUAL_WORKING_MAP_ENDING
                 && row >= ACTUAL_WORKING_MAP_BEGGINIG &&
                 row <= ACTUAL_WORKING_MAP_ENDING) {
             buildBuilding(col, row, option);
+            if(KuzniaGame.soundOn == true)
+            building.play();
         }
     }
 
@@ -295,7 +346,7 @@ public class GameActive implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         mapRenderer.startUp(mCamera);
         gridRenderer.start(mCamera);
-        hud.showInterface();
+
 
         /*odpowiada za renderowanie textur komorki*/
         for (int i = ACTUAL_WORKING_MAP_BEGGINIG; i <= ACTUAL_WORKING_MAP_ENDING; i++) {
@@ -323,6 +374,9 @@ public class GameActive implements Screen {
         }
 
         userInput();
+        hud.showInterface();
+        popUpMenu.showMenu();
+
         mCamera.update();
         //draw();
     }
