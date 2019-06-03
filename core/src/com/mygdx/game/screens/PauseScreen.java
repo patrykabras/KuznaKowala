@@ -17,8 +17,8 @@ import com.mygdx.game.app.GameActive;
 import com.mygdx.game.app.KuzniaGame;
 
 public class PauseScreen implements Screen {
-    KuzniaGame game;
 
+    KuzniaGame game;
     Texture continueGameInactive;
     Texture continueGameActive;
     Texture saveGameInactive;

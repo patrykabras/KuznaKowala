@@ -55,6 +55,7 @@ public class OptionScreen implements Screen {
     public OptionScreen(KuzniaGame game, GameActive gameActive) {
         this.game = game;
         this.gameActive = gameActive;
+        background = new Texture("bg.jpg");
         loadTextures();
         createDrawable();
         createMenu();
