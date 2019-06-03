@@ -28,6 +28,7 @@ public class PauseScreen implements Screen {
     Texture exitInactive;
     Texture exitActive;
     Texture menuHolder;
+    Texture background;
     Stage stage;
     Drawable drawableMenu;
     Drawable drawableContinue;
@@ -48,6 +49,7 @@ public class PauseScreen implements Screen {
     public PauseScreen(KuzniaGame game, GameActive gameActive) {
         this.game = game;
         this.gameActive = gameActive;
+        background = new Texture("bg.jpg");
         loadTextures();
         createDrawable();
         createMenu();
@@ -112,7 +114,9 @@ public class PauseScreen implements Screen {
 
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                gameActive.resume();
                 game.setScreen(gameActive);
+
                 dispose();
             }
         });
@@ -204,8 +208,9 @@ public class PauseScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0, 154, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        game.batch.begin();
+        game.batch.draw(background, 0 ,0);
+        game.batch.end();
         stage.act();
         stage.draw();
     }

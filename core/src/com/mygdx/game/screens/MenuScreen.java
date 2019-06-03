@@ -28,6 +28,7 @@ public class MenuScreen implements Screen {
     Texture exitInactive;
     Texture exitActive;
     Texture menuHolder;
+    Texture background;
     Stage stage;
     Drawable drawableMenu;
     Drawable drawableNewGame;
@@ -46,6 +47,7 @@ public class MenuScreen implements Screen {
 
     public MenuScreen(KuzniaGame game) {
         this.game = game;
+        background = new Texture("bg.jpg");
         loadTextures();
         createDrawable();
         createMenu();
@@ -202,8 +204,9 @@ public class MenuScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0, 154, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        game.batch.begin();
+        game.batch.draw(background, 0 ,0);
+        game.batch.end();
         stage.act();
         stage.draw();
     }

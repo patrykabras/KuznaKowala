@@ -3,6 +3,7 @@ package com.mygdx.game.app;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
@@ -26,7 +27,7 @@ import com.mygdx.game.screens.PauseScreen;
 
 import java.util.Random;
 
-public class GameActive implements Screen {
+public class GameActive<music> implements Screen {
 
     private final KuzniaGame game;
     private final int ACTUAL_WORKING_MAP_BEGGINIG = 2;
@@ -56,6 +57,7 @@ public class GameActive implements Screen {
     private PopUpMenu popUpMenu;
     public static boolean canBuild;
     public static boolean canDestroy;
+    private Music building;
 
 
     private enum TerrainType {
@@ -87,6 +89,8 @@ public class GameActive implements Screen {
         population = new Population();
         hud = new Hud(game.batch, game, population);
         popUpMenu = new PopUpMenu(game);
+        building = Gdx.audio.newMusic(Gdx.files.internal("building.ogg"));
+        building.setVolume(0.2f);
     }
 
     @Override
@@ -97,6 +101,9 @@ public class GameActive implements Screen {
     public void userInput() {
         //escape button to menu
         if (Gdx.input.isKeyPressed(131)) {
+            canDestroy = false;
+            canBuild = false;
+            PopUpMenu.isOn = false;
             game.setScreen(new PauseScreen(game, this));
             this.pause();
         }
@@ -214,12 +221,16 @@ public class GameActive implements Screen {
                 && row >= ACTUAL_WORKING_MAP_BEGGINIG &&
                 row <= ACTUAL_WORKING_MAP_ENDING) {
             upgradeBuilding(col, row, option);
+            if(KuzniaGame.soundOn == true)
+            building.play();
         } else if (cells[col][row].getBuilding() == null
                 && col >= ACTUAL_WORKING_MAP_BEGGINIG
                 && col <= ACTUAL_WORKING_MAP_ENDING
                 && row >= ACTUAL_WORKING_MAP_BEGGINIG &&
                 row <= ACTUAL_WORKING_MAP_ENDING) {
             buildBuilding(col, row, option);
+            if(KuzniaGame.soundOn == true)
+            building.play();
         }
     }
 
@@ -357,10 +368,10 @@ public class GameActive implements Screen {
             }
         }
 
-
+        userInput();
         hud.showInterface();
         popUpMenu.showMenu();
-        userInput();
+
         mCamera.update();
         //draw();
     }
