@@ -16,6 +16,7 @@ import com.mygdx.game.gird.Cell;
 import com.mygdx.game.gird.GridRenderer;
 import com.mygdx.game.gird.MapGrid;
 import com.mygdx.game.hud.Hud;
+import com.mygdx.game.hud.PopUpMenu;
 import com.mygdx.game.map.MapGenerator;
 import com.mygdx.game.map.MapRenderer;
 import com.mygdx.game.people.Person;
@@ -51,6 +52,7 @@ public class GameActive implements Screen {
     private final static double UPGRADE_MULTIPLER = 1.5;
     private final static double COST_MULTIPLER = 1.5;
     private Population population;
+    private PopUpMenu popUpMenu;
 
 
     private enum TerrainType {
@@ -73,12 +75,13 @@ public class GameActive implements Screen {
 
     public GameActive(KuzniaGame game) {
         this.game = game;
-        hud = new Hud(game.batch, game);
         mCamera = new Camera();
         test = new MapGenerator();
         mapRenderer = new MapRenderer();
         gridRenderer = new GridRenderer();
         population = new Population();
+        hud = new Hud(game.batch, game, population);
+        popUpMenu = new PopUpMenu(game);
     }
 
     @Override
@@ -178,7 +181,8 @@ public class GameActive implements Screen {
                 && col <= ACTUAL_WORKING_MAP_ENDING
                 && row >= ACTUAL_WORKING_MAP_BEGGINIG &&
                 row <= ACTUAL_WORKING_MAP_ENDING) {
-            upgradeBuilding(col, row, option);
+            popUpMenu.isOn = true;
+            //upgradeBuilding(col, row, option);
         } else if (cells[col][row].getBuilding() == null
                 && col >= ACTUAL_WORKING_MAP_BEGGINIG
                 && col <= ACTUAL_WORKING_MAP_ENDING
@@ -295,7 +299,7 @@ public class GameActive implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         mapRenderer.startUp(mCamera);
         gridRenderer.start(mCamera);
-        hud.showInterface();
+
 
         /*odpowiada za renderowanie textur komorki*/
         for (int i = ACTUAL_WORKING_MAP_BEGGINIG; i <= ACTUAL_WORKING_MAP_ENDING; i++) {
@@ -322,6 +326,9 @@ public class GameActive implements Screen {
             }
         }
 
+
+        hud.showInterface();
+        popUpMenu.showMenu();
         userInput();
         mCamera.update();
         //draw();
