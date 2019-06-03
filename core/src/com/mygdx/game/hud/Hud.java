@@ -16,6 +16,7 @@ import com.mygdx.game.app.KuzniaGame;
 import com.mygdx.game.data.materials.Metal;
 import com.mygdx.game.data.materials.Stone;
 import com.mygdx.game.data.materials.Wood;
+import com.mygdx.game.people.Population;
 
 
 public class Hud {
@@ -29,14 +30,15 @@ public class Hud {
     private Wood wood = Wood.getInstance();
     private Stone stone = Stone.getInstance();
     private Metal metal = Metal.getInstance();
-    //private Human human;
+    private Population population;
     private Image woodTexture;
     private Image stoneTexture;
     private Image metalTexture;
     private Image humanTexture;
 
-    public Hud(SpriteBatch sb, KuzniaGame game) {
+    public Hud(SpriteBatch sb, KuzniaGame game, Population population) {
         this.game = game;
+        this.population = population;
 
 
         viewport = new FitViewport(720, 420, new OrthographicCamera());
@@ -54,17 +56,17 @@ public class Hud {
         woodLabel = new Label(String.format(String.format("%03d", wood.getValue())), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         stoneLabel = new Label(String.format(String.format("%03d", stone.getValue())), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         oreLabel = new Label(String.format(String.format("%03d", metal.getValue())), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        humanLabel = new Label(String.format(String.format("%03d", 0)), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        humanLabel = new Label(String.format(String.format("%03d", population.getPopulation().size())), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
         table.add(woodTexture);
-        table.add(woodLabel);
+        table.add(woodLabel).width(20).pad(10);
         table.add(stoneTexture);
-        table.add(stoneLabel);
+        table.add(stoneLabel).width(20).pad(10);
         table.add(metalTexture);
-        table.add(oreLabel);
+        table.add(oreLabel).width(20).pad(10);
         table.add(humanTexture);
-        table.add(humanLabel);
-        table.padLeft(-490);
+        table.add(humanLabel).width(20).pad(10);
+        table.padLeft(-400);
 
         stage.addActor(table);
 
@@ -74,6 +76,7 @@ public class Hud {
         woodLabel.setText(wood.getValue());
         stoneLabel.setText(stone.getValue());
         oreLabel.setText(metal.getValue());
+        humanLabel.setText( population.getPopulation().size());
         game.batch.setProjectionMatrix(this.stage.getCamera().combined);
         this.stage.draw();
     }
