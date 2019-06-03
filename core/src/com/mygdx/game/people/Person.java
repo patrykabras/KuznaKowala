@@ -12,6 +12,8 @@ public class Person {
     private Vector3 workPositon;
     private String  workName;
     private SpriteBatch sprite= new SpriteBatch();
+    private boolean isHome;
+    private boolean isWork;
     private final Texture personTexture = new Texture("person.png");
     private final Texture personMiner = new Texture("personMiner.png");
     private final Texture personLamber = new Texture("personLamber.png");
@@ -27,6 +29,7 @@ public class Person {
     public Person(Vector3 position) {
         this.position = position;
         this.workName = "Normal";
+        isHome = true;
     }
 
     public void drawPerson(Camera camera){
@@ -35,8 +38,11 @@ public class Person {
         if(workPositon != null) {
             float workX = this.workPositon.x;
             float workY = this.workPositon.y;
+            float homeX = this.homePositon.x;
+            float homeY = this.homePositon.y;
             float positionX = this.position.x;
             float positionY = this.position.y;
+            if(isHome){
             if(positionX <= workX){
                 position.x++;
             }else{
@@ -47,15 +53,34 @@ public class Person {
             }else {
                 position.y--;
             }
-//            if(positionX == workX){
-//
-//            }
-//            if(positionY == workY){
-//
-//            }
+            }
+            if(isWork){
+                if(positionX <= homeX){
+                    position.x++;
+                }else{
+                    position.x--;
+                }
+                if(positionY <= homeY){
+                    position.y++;
+                }else {
+                    position.y--;
+                }
+            }
+            if(positionX == workX && positionY == workY ){
+                this.isWork = true;
+                this.isHome = false;
+
+            }
+            if(positionX == homeX && positionY == homeY){
+                this.isHome = true;
+                this.isWork = false;
+
+            }
         }
         if(this.workName == "Normal")sprite.draw(personTexture, position.x, position.y);
         else if(this.workName == "stonemine")sprite.draw(personMiner, position.x, position.y);
+        else if(this.workName == "woodcutter")sprite.draw(personLamber, position.x, position.y);
+        else if(this.workName == "metalmine")sprite.draw(personSmith, position.x, position.y);
         sprite.end();
     }
 
@@ -69,6 +94,9 @@ public class Person {
     }
     public void setWorkPositon(Vector3 position){
         this.workPositon = position;
+    }
+    public void setHomePositon(Vector3 position){
+        this.homePositon = position;
     }
 
 }

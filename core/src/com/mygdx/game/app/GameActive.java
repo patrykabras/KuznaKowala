@@ -241,24 +241,45 @@ public class GameActive<music> implements Screen {
     private void upgradeBuilding(int col, int row, TerrainType option) {
         switch (option) {
             case DIRT:
-                if (stone.getValue() > stoneMineUpgradeCost && cells[col][row].getBuilding().getLvl()< MAX_LVL) {
+                if (stone.getValue() > stoneMineUpgradeCost && cells[col][row].getBuilding().getLvl()< MAX_LVL && population.getPopulation().size() > 0) {
                     cells[col][row].getBuilding().upgrade();
                     stone.decreasedValue(stoneMineUpgradeCost);
                     stoneMineUpgradeCost *= UPGRADE_MULTIPLER;
+                    int tempSize = population.getPopulation().size();
+                    Person temp = population.getPopulation().get(tempSize-1);
+                    population.getPopulation().remove(tempSize-1);
+                    temp.givePurpose("stonemine");
+                    Random gener = new Random();
+                    temp.setWorkPositon(new Vector3(row * MapGrid.getCellSize() + gener.nextInt(20),col * MapGrid.getCellSize()+ gener.nextInt(20),0));
+                    populationOfWorkers.getPopulation().add(temp);
                 }
                 break;
             case ROCK:
-                if (metal.getValue() > metalMineUpgradeCost && cells[col][row].getBuilding().getLvl()< MAX_LVL) {
+                if (metal.getValue() > metalMineUpgradeCost && cells[col][row].getBuilding().getLvl()< MAX_LVL && population.getPopulation().size() > 0) {
                     cells[col][row].getBuilding().upgrade();
                     metal.decreasedValue(metalMineUpgradeCost);
                     metalMineUpgradeCost *= UPGRADE_MULTIPLER;
+                    int tempSize = population.getPopulation().size();
+                    Person temp = population.getPopulation().get(tempSize-1);
+                    population.getPopulation().remove(tempSize-1);
+                    temp.givePurpose("metalmine");
+                    Random generss = new Random();
+                    temp.setWorkPositon(new Vector3(row * MapGrid.getCellSize() + generss.nextInt(20),col * MapGrid.getCellSize()+ generss.nextInt(20),0));
+                    populationOfWorkers.getPopulation().add(temp);
                 }
                 break;
             case GRASS:
-                if (wood.getValue() > woodMineUpgradeCost && cells[col][row].getBuilding().getLvl()< MAX_LVL) {
+                if (wood.getValue() > woodMineUpgradeCost && cells[col][row].getBuilding().getLvl()< MAX_LVL && population.getPopulation().size() > 0) {
                     cells[col][row].getBuilding().upgrade();
                     wood.decreasedValue(woodMineUpgradeCost);
                     woodMineUpgradeCost *= UPGRADE_MULTIPLER;
+                    int tempSize = population.getPopulation().size();
+                    Person temp = population.getPopulation().get(tempSize-1);
+                    population.getPopulation().remove(tempSize-1);
+                    temp.givePurpose("woodcutter");
+                    Random geners = new Random();
+                    temp.setWorkPositon(new Vector3(row * MapGrid.getCellSize() + geners.nextInt(20),col * MapGrid.getCellSize()+ geners.nextInt(20),0));
+                    populationOfWorkers.getPopulation().add(temp);
                 }
                 break;
             case SAND:
@@ -266,7 +287,9 @@ public class GameActive<music> implements Screen {
                         cells[col][row].getBuilding().upgrade();
                         Random gener = new Random();
                         for (int i = 0; i < 5; i++) {
-                            population.addNewPerson(new Person(new Vector3(row * MapGrid.getCellSize() + gener.nextInt(20),col * MapGrid.getCellSize()+ gener.nextInt(20),0)));
+                            Person temp = new Person(new Vector3(row * MapGrid.getCellSize() + gener.nextInt(20),col * MapGrid.getCellSize()+ gener.nextInt(20),0));
+                            temp.setHomePositon(new Vector3(row * MapGrid.getCellSize(),col * MapGrid.getCellSize(),0));
+                            population.addNewPerson(temp);
                         }
                     }
                 break;
@@ -303,21 +326,37 @@ public class GameActive<music> implements Screen {
                             building = buildingFactory.createNewBuilding("humansettling");
                             Random gener = new Random();
                             for (int i = 0; i < 5; i++) {
-                                population.addNewPerson(new Person(new Vector3(row * MapGrid.getCellSize() + gener.nextInt(20),col * MapGrid.getCellSize()+ gener.nextInt(20),0)));
+                                Person temp = new Person(new Vector3(row * MapGrid.getCellSize() + gener.nextInt(20),col * MapGrid.getCellSize()+ gener.nextInt(20),0));
+                                temp.setHomePositon(new Vector3(row * MapGrid.getCellSize(),col * MapGrid.getCellSize(),0));
+                                population.addNewPerson(temp);
                             }
                         break;
                     case ROCK:
-                        if (metal.getValue() >= metalMineCost) {
+                        if (metal.getValue() >= metalMineCost && population.getPopulation().size() > 0) {
                             building = buildingFactory.createNewBuilding("metalmine");
                             metal.decreasedValue(metalMineCost);
                             metalMineCost *= COST_MULTIPLER;
+                            int tempSize = population.getPopulation().size();
+                            Person temp = population.getPopulation().get(tempSize-1);
+                            population.getPopulation().remove(tempSize-1);
+                            temp.givePurpose("metalmine");
+                            Random generss = new Random();
+                            temp.setWorkPositon(new Vector3(row * MapGrid.getCellSize() + generss.nextInt(20),col * MapGrid.getCellSize()+ generss.nextInt(20),0));
+                            populationOfWorkers.getPopulation().add(temp);
                         }
                         break;
                     case GRASS:
-                        if (wood.getValue() >= woodCutterCost) {
+                        if (wood.getValue() >= woodCutterCost && population.getPopulation().size() > 0) {
                             building = buildingFactory.createNewBuilding("woodcutter");
                             wood.decreasedValue(woodCutterCost);
                             woodCutterCost *= COST_MULTIPLER;
+                            int tempSize = population.getPopulation().size();
+                            Person temp = population.getPopulation().get(tempSize-1);
+                            population.getPopulation().remove(tempSize-1);
+                            temp.givePurpose("woodcutter");
+                            Random geners = new Random();
+                            temp.setWorkPositon(new Vector3(row * MapGrid.getCellSize() + geners.nextInt(20),col * MapGrid.getCellSize()+ geners.nextInt(20),0));
+                            populationOfWorkers.getPopulation().add(temp);
                         }
                         break;
                     default:
