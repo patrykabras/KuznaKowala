@@ -160,6 +160,7 @@ public class GameActive<music> implements Screen {
 
             } else if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) && canDestroy == true) {
                 removeBuildingFromCell(mouseClickPositon);
+                if(KuzniaGame.soundOn == true)
                 destroy.play();
             }
 
