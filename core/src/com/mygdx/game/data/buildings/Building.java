@@ -3,8 +3,11 @@ package com.mygdx.game.data.buildings;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.camera.Camera;
+import com.mygdx.game.people.Person;
 
 public abstract class Building implements Buildable, Destroyable, Upgradable {
+    public Person[] persons = new Person[4];
+
     protected float x,y;
 
     public float getX() {
