@@ -54,8 +54,8 @@ public class GameActive implements Screen {
     private final static double COST_MULTIPLER = 1.5;
     private Population population;
     private PopUpMenu popUpMenu;
-    private ImageButton upgrade;
-    private ImageButton destroy;
+    public static boolean canBuild;
+    public static boolean canDestroy;
 
 
     private enum TerrainType {
@@ -78,6 +78,8 @@ public class GameActive implements Screen {
 
     public GameActive(KuzniaGame game) {
         this.game = game;
+        canBuild = false;
+        canDestroy = false;
         mCamera = new Camera();
         test = new MapGenerator();
         mapRenderer = new MapRenderer();
@@ -85,8 +87,6 @@ public class GameActive implements Screen {
         population = new Population();
         hud = new Hud(game.batch, game, population);
         popUpMenu = new PopUpMenu(game);
-        upgrade = popUpMenu.getUpgrade();
-        destroy = popUpMenu.getDestroy();
     }
 
     @Override
@@ -145,13 +145,20 @@ public class GameActive implements Screen {
                 e.printStackTrace();
             }
 
-            if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
-                checkAndBuildOrUpgrade(mouseClickPositon, option);
-            } else if (Gdx.input.isButtonPressed(Input.Buttons.RIGHT))
+            if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) && canBuild == true) {
+                    checkAndBuildOrUpgrade(mouseClickPositon, option);
+
+            } else if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) && canDestroy == true)
                 removeBuildingFromCell(mouseClickPositon);
 
         }
         if (Gdx.input.isButtonPressed(Input.Buttons.RIGHT)) {
+            if(popUpMenu.isOn == false && canBuild == true){
+                canBuild = false;
+            }
+            if(popUpMenu.isOn == false && canDestroy == true){
+                canDestroy = false;
+            }
             if (popUpMenu.isOn == false) {
                 popUpMenu.isOn = true;
                 try {
@@ -162,12 +169,14 @@ public class GameActive implements Screen {
             }
             else {
                 popUpMenu.isOn = false;
+
                 try {
                     Thread.sleep(250);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
+
         }
 
     }
@@ -193,7 +202,7 @@ public class GameActive implements Screen {
         }
     }
 
-    private void checkAndBuildOrUpgrade(Vector3 mousePosition, TerrainType option) {
+    public void checkAndBuildOrUpgrade(Vector3 mousePosition, TerrainType option) {
         int row = (int) mousePosition.x / MapGrid.getCellSize();
         int col = (int) mousePosition.y / MapGrid.getCellSize();
         System.out.println("Column: " + col);

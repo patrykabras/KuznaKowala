@@ -1,5 +1,6 @@
 package com.mygdx.game.hud;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
@@ -33,13 +34,6 @@ public class PopUpMenu {
     private ImageButton destroy;
     public static boolean isOn;
 
-    public ImageButton getUpgrade() {
-        return upgrade;
-    }
-
-    public ImageButton getDestroy() {
-        return destroy;
-    }
 
     public PopUpMenu(KuzniaGame game) {
 
@@ -75,11 +69,34 @@ public class PopUpMenu {
     private void createUpgrade(){
         upgrade = new ImageButton(drawableUpgrade);
         upgrade.setSize(upgradeTexture.getWidth(), upgradeTexture.getHeight());
+        upgrade.addListener(new ClickListener() {
+            @Override
+            public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+            }
+
+            @Override
+            public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+                //upgrade.getStyle().imageUp = drawableNewGame;
+            }
+
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                GameActive.canBuild = true;
+                isOn = false;
+            }
+        });
     }
 
     private void createDestroy(){
         destroy = new ImageButton(drawableDestroy);
         destroy.setSize(destroyTexture.getWidth(), destroyTexture.getHeight());
+        destroy.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                GameActive.canDestroy = true;
+                isOn = false;
+            }
+        });
     }
 
     public void showMenu(){
