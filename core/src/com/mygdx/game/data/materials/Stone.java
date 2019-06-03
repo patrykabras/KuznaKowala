@@ -1,5 +1,12 @@
 package com.mygdx.game.data.materials;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
+
 public class Stone extends Material {
     private static Stone instance = new Stone();
     private int value = DEFAULT_VALUE;

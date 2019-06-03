@@ -15,6 +15,17 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.app.GameActive;
 import com.mygdx.game.app.KuzniaGame;
+import com.mygdx.game.data.gridData.CellsHolder;
+import com.mygdx.game.data.materials.Metal;
+import com.mygdx.game.data.materials.Stone;
+import com.mygdx.game.data.materials.Wood;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import java.io.File;
 
 public class PauseScreen implements Screen {
     KuzniaGame game;
@@ -140,7 +151,33 @@ public class PauseScreen implements Screen {
 
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                //wywolanie zapisu gry
+                //zaimplementowanie zapisu
+                try {
+                    JAXBContext metal = JAXBContext.newInstance(Metal.class);
+                    JAXBContext wood = JAXBContext.newInstance(Wood.class);
+                    JAXBContext stone = JAXBContext.newInstance(Stone.class);
+                    JAXBContext cells = JAXBContext.newInstance(CellsHolder.class);
+
+                    Marshaller metalMarshaller = metal.createMarshaller();
+                    Marshaller woodMarshaller = wood.createMarshaller();
+                    Marshaller stoneMarshaller = stone.createMarshaller();
+                    Marshaller cellsMarshaller = cells.createMarshaller();
+
+                    Metal metalValue = Metal.getInstance();
+                    Wood woodValue = Wood.getInstance();
+                    Stone stoneValue = Stone.getInstance();
+                    CellsHolder cellsHolderValue = CellsHolder.getInstance();
+
+                    metalMarshaller.marshal(metalValue, new File("metal.xml"));
+                    metalMarshaller.marshal(woodValue, new File("wood.xml"));
+                    metalMarshaller.marshal(stoneValue, new File("stone.xml"));
+                    metalMarshaller.marshal(cellsHolderValue, new File("cells.xml"));
+
+
+                } catch (JAXBException e) {
+                    e.printStackTrace();
+                }
+
             }
         });
     }
@@ -209,7 +246,7 @@ public class PauseScreen implements Screen {
     @Override
     public void render(float delta) {
         game.batch.begin();
-        game.batch.draw(background, 0 ,0, 720,480);
+        game.batch.draw(background, 0, 0, 720, 480);
         game.batch.end();
         stage.act();
         stage.draw();
