@@ -73,9 +73,12 @@ public class Hud {
     }
 
     public void showInterface() {
-        woodLabel.setText(wood.getValue());
-        stoneLabel.setText(stone.getValue());
-        oreLabel.setText(metal.getValue());
+        if(wood.getValue() > 1000) woodLabel.setText(wood.getValue()/1000 + "k");
+        else woodLabel.setText(wood.getValue());
+        if(stone.getValue() > 1000) stoneLabel.setText(stone.getValue()/1000 + "k");
+        else stoneLabel.setText(stone.getValue());
+        if(metal.getValue() > 1000) oreLabel.setText(metal.getValue()/1000 + "k");
+        else oreLabel.setText(metal.getValue());
         humanLabel.setText( population.getPopulation().size());
         game.batch.setProjectionMatrix(this.stage.getCamera().combined);
         this.stage.draw();

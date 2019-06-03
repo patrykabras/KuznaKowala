@@ -291,6 +291,9 @@ public class GameActive<music> implements Screen {
                         break;
                     case SAND:
                             building = buildingFactory.createNewBuilding("humansettling");
+                            for (int i = 0; i < 10; i++) {
+                                population.addNewPerson(new Person(new Vector3(row * MapGrid.getCellSize() + 5,col * MapGrid.getCellSize()+5,0)));
+                            }
                         break;
                     case ROCK:
                         if (metal.getValue() >= metalMineCost) {
