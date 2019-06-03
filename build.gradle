@@ -82,6 +82,8 @@ project(":html") {
         compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion:sources"
         compile "com.badlogicgames.gdx:gdx-box2d-gwt:$gdxVersion:sources"
         
+        // https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api
+        compile group: 'javax.xml.bind', name: 'jaxb-api', version: '2.4.0-b180830.0359'
     }
 }
 

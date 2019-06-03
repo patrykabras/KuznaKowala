@@ -18,6 +18,7 @@ public class Population {
     public void setPopulation(ArrayList<Person> population) {
         this.population = population;
     }
+
     public void addNewPerson(Person nn){
         population.add(nn);
 
